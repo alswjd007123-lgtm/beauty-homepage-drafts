@@ -308,13 +308,14 @@ filterBtns.forEach(btn => btn.addEventListener('click', () => {
   tpls.forEach(t => { t.hidden = f !== 'all' && t.dataset.cat !== f; });
 }));
 
-// 미리보기 창: 시안을 iframe으로 띄우고 데스크탑(1440px) / 모바일(390px) 폭으로 전환한다
+// 미리보기 창: 시안을 iframe으로 띄우고 데스크탑(1280px) / 모바일(390px) 폭으로 전환한다
 const pv = document.getElementById('pv');
 const pvStage = pv.querySelector('.pv-stage');
 const pvBox = pv.querySelector('.pv-box');
 const pvFrame = pv.querySelector('iframe');
 const pvModes = pv.querySelectorAll('.pv-mode');
-const SIZES = { desktop: { w: 1440, h: 0 }, mobile: { w: 390, h: 844 } };
+// 데스크탑은 높이를 최대 900px로 제한한다 (핸드폰에서 너무 큰 화면을 그리면 메모리가 부족해 브라우저가 꺼진다)
+const SIZES = { desktop: { w: 1280, h: 900 }, mobile: { w: 390, h: 844 } };
 let pvMode = 'desktop';
 
 // 화면 크기에 맞춰 iframe을 축소해 보여 준다 (안쪽 페이지는 실제 폭 기준으로 그려진다)
@@ -324,7 +325,7 @@ function fitPreview() {
   const availH = pvStage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - (pvMode === 'mobile' ? 16 : 0);
   const { w, h } = SIZES[pvMode];
   const scale = pvMode === 'mobile' ? Math.min(1, availW / w, availH / h) : Math.min(1, availW / w);
-  const frameH = pvMode === 'mobile' ? h : availH / scale;
+  const frameH = pvMode === 'mobile' ? h : Math.min(availH / scale, h);
   pvFrame.style.width = w + 'px';
   pvFrame.style.height = frameH + 'px';
   pvFrame.style.transform = `scale(${scale})`;
