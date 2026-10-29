@@ -4,37 +4,438 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뷰티샵 홈페이지 시안</title>
-<meta name="description" content="피부관리·네일·헤어 뷰티샵 홈페이지 시안 3종">
+<meta name="description" content="피부관리·네일·속눈썹·헤어 뷰티샵 홈페이지 시안 6종">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
-:root{--bg1:#f6ece6;--bg2:#e8e6f3;--ink:#2a2530;--sub:#6b6372;--glass:rgba(255,255,255,.45);--edge:rgba(255,255,255,.7)}
+:root{--bg1:#f6ece6;--bg2:#e8e6f3;--ink:#2a2530;--sub:#6b6372;--glass:rgba(255,255,255,.45);--edge:rgba(255,255,255,.7);--line:rgba(42,37,48,.12);--dim:rgba(30,24,36,.62)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{min-height:100vh;font-family:'Gowun Dodum',sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--bg1),var(--bg2));padding:64px 16px;position:relative;overflow-x:hidden}
+body{min-height:100vh;font-family:'Gowun Dodum',sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--bg1),var(--bg2));padding:56px 16px 72px;position:relative;overflow-x:hidden}
 body::before,body::after{content:"";position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(90px);z-index:-1;opacity:.55}
 body::before{background:#f3b9a7;top:-120px;left:-100px}
 body::after{background:#b9b3ea;bottom:-140px;right:-100px}
-main{max-width:1000px;margin:0 auto}
+main{max-width:1120px;margin:0 auto}
 h1{font-size:clamp(26px,4vw,38px);font-weight:400;text-align:center}
-.lead{text-align:center;color:var(--sub);margin:12px 0 44px}
-.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.card{display:flex;flex-direction:column;gap:6px;padding:28px 26px;border-radius:24px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 12px 30px -16px rgba(60,40,70,.3);color:inherit;text-decoration:none;transition:transform .3s,box-shadow .3s}
-.card:hover,.card:focus-visible{transform:translateY(-6px);box-shadow:0 20px 40px -18px rgba(60,40,70,.4)}
-.no{font-size:13px;color:var(--sub)}
-.card h2{font-size:22px;font-weight:400}
-.card p{color:var(--sub);font-size:15px;line-height:1.6}
-.go{margin-top:10px;font-size:14px}
-@media(prefers-reduced-motion:reduce){.card{transition:none}}
+.lead{text-align:center;color:var(--sub);margin:12px 0 28px}
+
+/* 업종 필터 */
+.filter{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:36px}
+.filter button{min-height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font:inherit;font-size:15px;color:var(--sub);cursor:pointer;transition:background .25s,color .25s}
+.filter button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* 템플릿 목록 */
+.list{display:grid;grid-template-columns:1fr;gap:36px 24px}
+.tpl{text-align:center}
+.tpl[hidden]{display:none}
+.shot{position:relative;aspect-ratio:1440/1000;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.6);border:1px solid var(--line);box-shadow:0 14px 34px -20px rgba(60,40,70,.45);transition:transform .35s,box-shadow .35s}
+.shot img{display:block;width:100%;height:100%;max-width:100%;object-fit:cover;object-position:top;transition:transform 1.2s ease}
+.shot .cover{position:absolute;inset:0;z-index:1}
+.over{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;background:var(--dim);opacity:0;transition:opacity .3s;pointer-events:none}
+.over p{max-width:300px;color:#fff;font-size:14px;line-height:1.6;margin-bottom:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-width:190px;min-height:44px;padding:0 22px;border:1px solid rgba(255,255,255,.85);border-radius:12px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#fff;font-size:16px;text-decoration:none;transition:background .25s,color .25s}
+.btn:hover,.btn:focus-visible{background:#fff;color:var(--ink)}
+.tpl h2{margin-top:14px;font-size:18px;font-weight:400}
+.tpl h2 a{color:inherit;text-decoration:none}
+.no{display:block;margin-top:4px;font-size:13px;color:var(--sub)}
+
+/* 마우스가 있는 기기: 올리면 덮개와 버튼 표시 */
+@media (hover:hover){
+  .shot:hover,.shot:focus-within{transform:translateY(-6px);box-shadow:0 24px 44px -22px rgba(60,40,70,.55)}
+  .shot:hover img{transform:scale(1.04)}
+  .shot:hover .over,.shot:focus-within .over{opacity:1;pointer-events:auto}
+}
+/* 터치 기기: 사진을 누르면 바로 시안으로 이동 */
+@media (hover:none){.over{display:none}}
+
+/* 미리보기 창 (데스크탑 / 모바일 전환) */
+.pv{width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;background:transparent;color:#fff;overflow:hidden}
+.pv::backdrop{background:rgba(20,16,26,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.pv[open]{display:flex;flex-direction:column}
+.pv-top{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 64px 12px 16px;position:relative;flex:none}
+.pv-mode{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font:inherit;font-size:15px;cursor:pointer;transition:background .25s,color .25s}
+.pv-mode svg{width:18px;height:18px}
+.pv-mode[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
+.pv-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer}
+.pv-close svg{width:28px;height:28px}
+.pv-close:hover,.pv-close:focus-visible{background:rgba(255,255,255,.15)}
+.pv-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px 16px 12px}
+.pv-box{position:relative;overflow:hidden;background:#fff;border-radius:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.pv-box iframe{position:absolute;top:0;left:0;border:0;background:#fff;transform-origin:0 0}
+.pv.is-mobile .pv-box{border-radius:28px;outline:8px solid #1d1a22}
+.pv-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px 16px;flex:none}
+.pv-name{font-size:17px}
+.pv-name small{display:block;font-size:13px;color:rgba(255,255,255,.7)}
+.pv-open{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:12px;background:#fff;color:var(--ink);text-decoration:none;font-size:15px;white-space:nowrap}
+.pv-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pv-ask{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:12px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.12);color:#fff;font:inherit;font-size:15px;white-space:nowrap;cursor:pointer}
+.pv-ask:hover,.pv-ask:focus-visible{background:rgba(255,255,255,.25)}
+
+/* 상담 예약 신청 */
+.consult{position:relative;margin-top:88px;padding:36px 20px;border-radius:28px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 50px -28px rgba(60,40,70,.45);overflow:hidden;scroll-margin-top:24px}
+.consult::before{content:"";position:absolute;inset:0;opacity:.06;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.consult > *{position:relative}
+.c-head{text-align:center;margin-bottom:28px}
+.c-head .eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.55);font-size:13px;color:var(--sub)}
+.c-head h2{margin-top:12px;font-size:clamp(24px,3.4vw,32px);font-weight:400}
+.c-head p{margin-top:10px;color:var(--sub);line-height:1.7}
+.c-form{display:grid;grid-template-columns:1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field > span,.field legend{font-size:14px;color:var(--ink)}
+.field em{font-style:normal;color:#c0566b}
+fieldset.field{border:0;min-width:0}
+/* legend는 flex 간격(gap)이 적용되지 않아 따로 아래 여백을 준다 */
+.field legend{padding:0;margin-bottom:10px}
+.c-form input[type="text"],.c-form input[type="tel"],.c-form input[type="date"],.c-form select,.c-form textarea{width:100%;min-height:48px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.6);font:inherit;font-size:16px;color:var(--ink)}
+.c-form textarea{min-height:110px;resize:vertical}
+.c-form input:focus,.c-form select:focus,.c-form textarea:focus{outline:2px solid var(--ink);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.45);font-size:15px;color:var(--sub);cursor:pointer;transition:background .2s,color .2s}
+.chips input:checked + span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chips input:focus-visible + span{outline:2px solid var(--ink);outline-offset:2px}
+.agree{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--sub);line-height:1.6;cursor:pointer}
+.agree input{flex:none;width:20px;height:20px;margin-top:2px;accent-color:var(--ink)}
+.c-submit{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border:0;border-radius:999px;background:#fee500;color:#3a1d1d;font:inherit;font-size:17px;cursor:pointer;box-shadow:0 14px 28px -14px rgba(120,100,0,.6);transition:transform .25s,opacity .25s}
+.c-submit svg{width:22px;height:22px}
+.c-submit:hover{transform:translateY(-2px)}
+.c-submit:disabled{opacity:.6;cursor:wait;transform:none}
+.c-msg{min-height:1.6em;text-align:center;font-size:15px;line-height:1.6}
+.c-msg.ok{color:#2f7a55}
+.c-msg.err{color:#b2455b}
+.c-note{margin-top:4px;text-align:center;font-size:13px;color:var(--sub);line-height:1.7}
+/* 연락 채널 (인스타그램 · 카카오톡 · 전화) */
+.contact{margin-top:28px}
+.contact h2{text-align:center;font-size:20px;font-weight:400;margin-bottom:16px}
+.ch-list{display:grid;grid-template-columns:1fr;gap:12px;max-width:420px;margin:0 auto}
+.ch{display:flex;align-items:center;gap:16px;min-height:76px;padding:16px 20px;border-radius:20px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 30px -20px rgba(60,40,70,.4);color:var(--ink);text-decoration:none;transition:transform .3s,box-shadow .3s}
+.ch:hover,.ch:focus-visible{transform:translateY(-4px);box-shadow:0 20px 38px -20px rgba(60,40,70,.5)}
+.ch .ic{flex:none;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;color:#fff}
+.ch .ic svg{width:24px;height:24px}
+.ch-insta .ic{background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#8a3ab9)}
+.ch b{display:block;font-weight:400;font-size:17px}
+.ch small{display:block;margin-top:2px;font-size:14px;color:var(--sub)}
+.ch .arrow{margin-left:auto;color:var(--sub)}
+.foot{margin-top:40px;text-align:center;font-size:13px;color:var(--sub)}
+
+@media (min-width:768px){
+  .consult{padding:52px 48px}
+  .c-form{grid-template-columns:1fr 1fr;gap:20px 18px}
+  .c-form .full{grid-column:1 / -1}
+}
+
+@media (min-width:768px){.list{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.list{grid-template-columns:repeat(3,1fr)}}
+@media (prefers-reduced-motion:reduce){.shot,.shot img,.over,.btn,.filter button,.pv-mode,.chips span,.c-submit,.ch{transition:none}.ch:hover{transform:none}.shot:hover img,.c-submit:hover{transform:none}}
 </style>
 </head>
 <body>
 <main>
   <h1>뷰티샵 홈페이지 시안</h1>
-  <p class="lead">세 가지 시안을 눌러 확인해 보세요.</p>
-  <section class="list">
-    <a class="card" href="시안1/"><span class="no">시안 1 · 피부관리·스파</span><h2>SOOM Skin &amp; Spa</h2><p>아이보리·세이지 톤의 차분한 고급형. 풀스크린 슬라이더와 시그니처 코스 소개.</p><span class="go">보러 가기 →</span></a>
-    <a class="card" href="시안2/"><span class="no">시안 2 · 네일·속눈썹</span><h2>Moment Nail Lab</h2><p>흰 바탕과 체리 포인트의 매거진형. 가로 스크롤 갤러리와 이달의 컬러 체험.</p><span class="go">보러 가기 →</span></a>
-    <a class="card" href="시안3/"><span class="no">시안 3 · 헤어살롱</span><h2>hairmood</h2><p>코랄·버터 컬러의 경쾌한 스타일. 비포·애프터와 단계별 예약 화면.</p><span class="go">보러 가기 →</span></a>
+  <p class="lead">여섯 가지 시안을 눌러 확인해 보세요.</p>
+
+  <nav class="filter" aria-label="업종별 시안 보기">
+    <button type="button" data-f="all" aria-pressed="true">전체</button>
+    <button type="button" data-f="skin" aria-pressed="false">피부·에스테틱</button>
+    <button type="button" data-f="nail" aria-pressed="false">네일·속눈썹</button>
+    <button type="button" data-f="hair" aria-pressed="false">헤어</button>
+  </nav>
+
+  <section class="list" aria-label="시안 목록">
+    <article class="tpl" data-cat="skin">
+      <div class="shot">
+        <img src="images/thumbs/design-1.jpg" alt="SOOM Skin &amp; Spa 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안1/index.html" aria-label="시안 1 SOOM Skin &amp; Spa 보러 가기"></a>
+        <div class="over"><p>아이보리·세이지 톤의 차분한 고급형. 풀스크린 슬라이더와 시그니처 코스 소개.</p><a class="btn" href="시안1/index.html">자세히 보기</a><a class="btn" href="시안1/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안1/index.html">SOOM Skin &amp; Spa</a></h2>
+      <span class="no">시안 1 · 피부관리·스파</span>
+    </article>
+
+    <article class="tpl" data-cat="nail">
+      <div class="shot">
+        <img src="images/thumbs/design-2.jpg" alt="Moment Nail Lab 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안2/index.html" aria-label="시안 2 Moment Nail Lab 보러 가기"></a>
+        <div class="over"><p>흰 바탕과 체리 포인트의 매거진형. 가로 스크롤 갤러리와 이달의 컬러 체험.</p><a class="btn" href="시안2/index.html">자세히 보기</a><a class="btn" href="시안2/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안2/index.html">Moment Nail Lab</a></h2>
+      <span class="no">시안 2 · 네일·속눈썹</span>
+    </article>
+
+    <article class="tpl" data-cat="hair">
+      <div class="shot">
+        <img src="images/thumbs/design-3.jpg" alt="hairmood 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안3/index.html" aria-label="시안 3 hairmood 보러 가기"></a>
+        <div class="over"><p>코랄·버터 컬러의 경쾌한 스타일. 비포·애프터와 예약 채널 카드.</p><a class="btn" href="시안3/index.html">자세히 보기</a><a class="btn" href="시안3/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안3/index.html">hairmood</a></h2>
+      <span class="no">시안 3 · 헤어살롱</span>
+    </article>
+
+    <article class="tpl" data-cat="skin">
+      <div class="shot">
+        <img src="images/thumbs/design-4.jpg" alt="결 에스테틱 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안4/index.html" aria-label="시안 4 결 에스테틱 보러 가기"></a>
+        <div class="over"><p>대리석 럭셔리 스타일. 고민별 탭에 프로그램과 후기를 묶고, 방문 상담 예약 폼을 담았어요.</p><a class="btn" href="시안4/index.html">자세히 보기</a><a class="btn" href="시안4/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안4/index.html">결 에스테틱</a></h2>
+      <span class="no">시안 4 · 에스테틱</span>
+    </article>
+
+    <article class="tpl" data-cat="nail">
+      <div class="shot">
+        <img src="images/thumbs/design-5.jpg" alt="루미 래쉬 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안5/index.html" aria-label="시안 5 루미 래쉬 보러 가기"></a>
+        <div class="over"><p>파스텔 유기적 스타일. 눈매를 고르면 어울리는 속눈썹을 그려 주는 스타일 찾기.</p><a class="btn" href="시안5/index.html">자세히 보기</a><a class="btn" href="시안5/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안5/index.html">루미 래쉬</a></h2>
+      <span class="no">시안 5 · 속눈썹 1인샵</span>
+    </article>
+
+    <article class="tpl" data-cat="hair">
+      <div class="shot">
+        <img src="images/thumbs/design-6.jpg" alt="아뜰리에 온도 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안6/index.html" aria-label="시안 6 아뜰리에 온도 보러 가기"></a>
+        <div class="over"><p>다크 에디토리얼 매거진. 페이지 번호가 있는 풀스크린 배너와 트렌드 룩북.</p><a class="btn" href="시안6/index.html">자세히 보기</a><a class="btn" href="시안6/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안6/index.html">아뜰리에 온도</a></h2>
+      <span class="no">시안 6 · 헤어살롱</span>
+    </article>
   </section>
+
+  <section class="consult" id="consult" aria-labelledby="consult-title">
+    <div class="c-head">
+      <span class="eyebrow">홈페이지 제작 상담</span>
+      <h2 id="consult-title">상담 예약 신청</h2>
+      <p>마음에 드는 시안을 고르고 내용을 적어 주세요.<br>카카오톡 오픈채팅으로 바로 상담해 드려요.</p>
+    </div>
+
+    <!-- 오픈채팅 주소 설정: 카카오톡 오픈채팅방의 링크(https://open.kakao.com/o/...)를 아래 data-openchat에 넣어 주세요 -->
+    <form class="c-form" id="consultForm" data-openchat="https://open.kakao.com/o/YOUR_OPENCHAT_ID" novalidate>
+      <label class="field"><span>성함 <em aria-hidden="true">*</em></span><input type="text" name="성함" autocomplete="name" required placeholder="홍길동"></label>
+      <label class="field"><span>연락처 <em aria-hidden="true">*</em></span><input type="tel" name="연락처" autocomplete="tel" inputmode="tel" required placeholder="010-0000-0000"></label>
+      <label class="field"><span>샵 이름</span><input type="text" name="샵 이름" placeholder="예: 루미 래쉬"></label>
+      <label class="field"><span>업종</span>
+        <select name="업종">
+          <option value="">선택해 주세요</option>
+          <option>피부관리·에스테틱</option>
+          <option>네일</option>
+          <option>속눈썹</option>
+          <option>헤어</option>
+          <option>기타</option>
+        </select>
+      </label>
+
+      <fieldset class="field full">
+        <legend>마음에 드는 시안 (여러 개 선택 가능)</legend>
+        <div class="chips">
+          <label><input type="checkbox" name="관심 시안" value="시안 1 SOOM Skin & Spa"><span>시안 1 · SOOM</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 2 Moment Nail Lab"><span>시안 2 · Moment</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 3 hairmood"><span>시안 3 · hairmood</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 4 결 에스테틱"><span>시안 4 · 결</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 5 루미 래쉬"><span>시안 5 · 루미</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 6 아뜰리에 온도"><span>시안 6 · 온도</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="field full">
+        <legend>연락받기 편한 시간</legend>
+        <div class="chips">
+          <label><input type="radio" name="희망 시간대" value="오전 (10~12시)"><span>오전</span></label>
+          <label><input type="radio" name="희망 시간대" value="오후 (12~18시)" checked><span>오후</span></label>
+          <label><input type="radio" name="희망 시간대" value="저녁 (18~21시)"><span>저녁</span></label>
+        </div>
+      </fieldset>
+
+      <label class="field"><span>희망 상담 날짜</span><input type="date" name="희망 날짜" id="consultDate"></label>
+      <label class="field"><span>원하는 오픈 시기</span>
+        <select name="오픈 시기">
+          <option value="">선택해 주세요</option>
+          <option>최대한 빨리</option>
+          <option>1개월 이내</option>
+          <option>2~3개월 이내</option>
+          <option>아직 미정</option>
+        </select>
+      </label>
+
+      <label class="field full"><span>요청 사항</span><textarea name="요청 사항" placeholder="원하는 분위기, 꼭 넣고 싶은 메뉴, 참고하는 사이트 등을 편하게 적어 주세요."></textarea></label>
+
+      <label class="agree full"><input type="checkbox" name="개인정보 동의" value="동의" required><span>상담을 위해 성함·연락처를 수집하며, 상담 완료 후 3개월 뒤 파기하는 데 동의합니다. (필수)</span></label>
+
+      <button type="submit" class="c-submit full"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-1 3.6c-.1.4.3.7.6.5l4.3-2.8c.5.1 1 .1 1.4.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span>상담 신청하기</span></button>
+      <p class="c-msg full" id="consultMsg" role="status" aria-live="polite"></p>
+    </form>
+    <p class="c-note">버튼을 누르면 작성한 내용이 복사되고 카카오톡 오픈채팅방이 열려요.<br>채팅창에 붙여넣어 보내 주시면 신청이 끝나요.</p>
+  </section>
+
+  <!-- 인스타그램: 아래 주소 끝에 실제 계정 아이디를 넣어 주세요 -->
+  <section class="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">작업물 더 보기</h2>
+    <div class="ch-list">
+      <a class="ch ch-insta" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램에서 작업물 보기 (새 창)">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <span><b>인스타그램</b><small>작업물·제작 후기 보기</small></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="foot">© 2026 뷰티샵 홈페이지 제작. 모든 시안의 사진은 예시 이미지예요.</footer>
 </main>
+
+<dialog class="pv" id="pv" aria-label="시안 미리보기">
+  <div class="pv-top">
+    <button type="button" class="pv-mode" data-mode="desktop" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>데스크탑</button>
+    <button type="button" class="pv-mode" data-mode="mobile" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>모바일</button>
+    <button type="button" class="pv-close" aria-label="미리보기 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div>
+  <div class="pv-stage"><div class="pv-box"><iframe title="시안 미리보기 화면"></iframe></div></div>
+  <div class="pv-bottom">
+    <p class="pv-name"></p>
+    <div class="pv-actions">
+      <button type="button" class="pv-ask">이 시안으로 상담 신청</button>
+      <a class="pv-open" href="#" target="_blank" rel="noopener">새 창으로 열기</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+// 업종 필터: 버튼을 누르면 해당 업종 시안만 보여 준다
+const filterBtns = document.querySelectorAll('.filter button');
+const tpls = document.querySelectorAll('.tpl');
+filterBtns.forEach(btn => btn.addEventListener('click', () => {
+  const f = btn.dataset.f;
+  filterBtns.forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+  tpls.forEach(t => { t.hidden = f !== 'all' && t.dataset.cat !== f; });
+}));
+
+// 미리보기 창: 시안을 iframe으로 띄우고 데스크탑(1440px) / 모바일(390px) 폭으로 전환한다
+const pv = document.getElementById('pv');
+const pvStage = pv.querySelector('.pv-stage');
+const pvBox = pv.querySelector('.pv-box');
+const pvFrame = pv.querySelector('iframe');
+const pvModes = pv.querySelectorAll('.pv-mode');
+const SIZES = { desktop: { w: 1440, h: 0 }, mobile: { w: 390, h: 844 } };
+let pvMode = 'desktop';
+
+// 화면 크기에 맞춰 iframe을 축소해 보여 준다 (안쪽 페이지는 실제 폭 기준으로 그려진다)
+function fitPreview() {
+  const cs = getComputedStyle(pvStage);
+  const availW = pvStage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - (pvMode === 'mobile' ? 16 : 0);
+  const availH = pvStage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - (pvMode === 'mobile' ? 16 : 0);
+  const { w, h } = SIZES[pvMode];
+  const scale = pvMode === 'mobile' ? Math.min(1, availW / w, availH / h) : Math.min(1, availW / w);
+  const frameH = pvMode === 'mobile' ? h : availH / scale;
+  pvFrame.style.width = w + 'px';
+  pvFrame.style.height = frameH + 'px';
+  pvFrame.style.transform = `scale(${scale})`;
+  pvBox.style.width = w * scale + 'px';
+  pvBox.style.height = frameH * scale + 'px';
+}
+
+function setMode(mode) {
+  pvMode = mode;
+  pv.classList.toggle('is-mobile', mode === 'mobile');
+  pvModes.forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode ? 'true' : 'false'));
+  fitPreview();
+}
+
+function openPreview(href, tpl) {
+  pv.querySelector('.pv-name').innerHTML = `${tpl.querySelector('h2').textContent}<small>${tpl.querySelector('.no').textContent}</small>`;
+  pv.querySelector('.pv-open').href = href;
+  pvFrame.src = href;
+  // 휴대폰으로 볼 때는 모바일 화면부터 보여 준다
+  pv.showModal();
+  setMode(window.innerWidth < 768 ? 'mobile' : 'desktop');
+  document.body.style.overflow = 'hidden';
+}
+
+tpls.forEach(tpl => {
+  tpl.querySelectorAll('a.cover, .over a.btn:not([target]), h2 a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    openPreview(a.getAttribute('href'), tpl);
+  }));
+});
+pvModes.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+pv.querySelector('.pv-close').addEventListener('click', () => pv.close());
+pv.addEventListener('click', e => { if (e.target === pv || e.target === pvStage) pv.close(); });
+pv.addEventListener('close', () => { pvFrame.src = 'about:blank'; document.body.style.overflow = ''; });
+window.addEventListener('resize', () => { if (pv.open) fitPreview(); });
+
+// 상담 예약 신청
+const cForm = document.getElementById('consultForm');
+const cMsg = document.getElementById('consultMsg');
+const cDate = document.getElementById('consultDate');
+const tplOrder = Array.from(tpls);
+let pvIndex = 0;
+cDate.min = new Date().toISOString().slice(0, 10);
+
+// 미리보기에서 "이 시안으로 상담 신청"을 누르면 해당 시안을 체크하고 신청서로 이동
+tplOrder.forEach((tpl, i) => tpl.querySelectorAll('a.cover, .over a.btn:not([target]), h2 a').forEach(a => a.addEventListener('click', () => { pvIndex = i; })));
+pv.querySelector('.pv-ask').addEventListener('click', () => {
+  const box = cForm.querySelectorAll('input[name="관심 시안"]')[pvIndex];
+  if (box) box.checked = true;
+  pv.close();
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('consult').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  setTimeout(() => cForm.querySelector('input[name="성함"]').focus({ preventScroll: true }), reduce ? 0 : 600);
+});
+
+const showMsg = (text, type) => { cMsg.textContent = text; cMsg.className = 'c-msg full ' + type; };
+
+// 작성한 내용을 채팅에 붙여넣기 좋은 글로 정리한다
+function buildSummary() {
+  const data = new FormData(cForm);
+  const lines = ['[홈페이지 제작 상담 신청]'];
+  const keys = ['성함', '연락처', '샵 이름', '업종', '관심 시안', '희망 시간대', '희망 날짜', '오픈 시기', '요청 사항'];
+  keys.forEach(k => {
+    const v = data.getAll(k).map(s => String(s).trim()).filter(Boolean).join(', ');
+    if (v) lines.push(`${k}: ${v}`);
+  });
+  return lines.join('\n');
+}
+
+// 클립보드 복사 (지원하지 않는 브라우저는 예전 방식으로 대신 복사)
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+  return new Promise((resolve, reject) => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:-9999px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    ok ? resolve() : reject();
+  });
+}
+
+cForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = cForm.querySelector('input[name="성함"]');
+  const tel = cForm.querySelector('input[name="연락처"]');
+  const agree = cForm.querySelector('input[name="개인정보 동의"]');
+  if (!name.value.trim()) { showMsg('성함을 입력해 주세요.', 'err'); name.focus(); return; }
+  if (!/^[0-9\-\s]{9,14}$/.test(tel.value.trim())) { showMsg('연락처를 숫자로 정확히 입력해 주세요.', 'err'); tel.focus(); return; }
+  if (!agree.checked) { showMsg('개인정보 수집에 동의해 주세요.', 'err'); agree.focus(); return; }
+
+  const chatUrl = cForm.dataset.openchat;
+  if (chatUrl.includes('YOUR_OPENCHAT_ID')) {
+    showMsg('아직 카카오톡 오픈채팅방이 연결되지 않았어요.', 'err');
+    return;
+  }
+
+  // 복사를 먼저 시작한 뒤 바로 새 창을 연다 (팝업 차단을 피하려면 클릭 직후에 열어야 한다)
+  const copying = copyText(buildSummary());
+  // noopener 옵션을 주면 창이 열려도 null이 돌아오므로, 연 뒤에 opener를 끊는다
+  const win = window.open(chatUrl, '_blank');
+  if (win) win.opener = null;
+  copying
+    .then(() => showMsg('작성한 내용이 복사되었어요. 오픈채팅방에 붙여넣어 보내 주세요!', 'ok'))
+    .catch(() => showMsg('오픈채팅방이 열렸어요. 작성한 내용을 채팅으로 보내 주세요!', 'ok'));
+  // 새 창이 막힌 경우 현재 창에서 이동
+  if (!win) location.href = chatUrl;
+});
+</script>
 </body>
 </html>
