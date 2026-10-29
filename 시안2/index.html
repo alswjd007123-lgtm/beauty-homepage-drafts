@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moment Nail Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f6; --ink:#151413; --gray:#8b8682; --line:#e6e1dc;
+  --blush:#e8c8c0; --cherry:#8e2b36; --nude:#d9b9a6;
+  --display:'DM Serif Display',serif; --en:'Inter',sans-serif;
+  --kr:'Pretendard',sans-serif;
+  --ease:cubic-bezier(.76,0,.24,1); --out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--kr);font-weight:400;letter-spacing:-.01em;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.label{font-family:var(--en);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+.label b{color:var(--ink);font-weight:500}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--ink);color:var(--bg);transition:transform 1.1s var(--ease) .2s}
+.loader span{font-family:var(--display);font-style:italic;font-size:clamp(40px,7vw,96px);overflow:hidden;display:block}
+.loader span i{display:block;font-style:inherit;animation:up 1s var(--out)}
+@keyframes up{from{transform:translateY(100%)}}
+body.ready .loader{transform:translateY(-100%)}
+
+/* cursor */
+.cursor{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--cherry);pointer-events:none;z-index:99;transition:width .3s,height .3s,margin .3s,background .3s;mix-blend-mode:multiply}
+.cursor.big{width:70px;height:70px;margin:-35px 0 0 -35px;background:rgba(142,43,54,.18)}
+@media(hover:none){.cursor{display:none}}
+
+/* header (ref: RooMin 상단 미니멀 텍스트 메뉴) */
+header{position:fixed;inset:0 0 auto;z-index:40;mix-blend-mode:difference;color:#fff}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:84px;max-width:none}
+.logo{font-family:var(--display);font-size:24px}
+.logo i{font-style:italic}
+nav{display:flex;gap:34px;font-family:var(--en);font-size:13px;letter-spacing:.06em}
+nav a{position:relative;overflow:hidden;display:inline-block;height:1.3em;line-height:1.3em}
+nav a span{display:block;transition:transform .5s var(--out)}
+nav a span::after{content:attr(data-t);display:block}
+nav a:hover span{transform:translateY(-100%)}
+.m-toggle{display:none;font-family:var(--en);font-size:13px;letter-spacing:.1em;background:none;border:0;color:#fff;cursor:pointer}
+
+/* hero (ref: RooMin 모자이크 이미지 그리드 + 좌상단 카피) */
+.hero{padding:150px 0 60px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:46px;gap:40px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,9.4vw,150px);line-height:.92;letter-spacing:-.03em}
+.hero h1 .row{display:block;overflow:hidden}
+.hero h1 .row span{display:inline-block;transform:translateY(105%);transition:transform 1.3s var(--out)}
+.hero h1 em{font-style:italic;color:var(--cherry)}
+body.ready .hero h1 .row span{transform:none}
+body.ready .hero h1 .row:nth-child(2) span{transition-delay:.12s}
+.hero-desc{max-width:300px;font-size:15px;line-height:1.75;color:#55504c;padding-bottom:12px}
+.mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:12px}
+.tile{overflow:hidden;position:relative;background:var(--line)}
+.tile:nth-child(1){grid-row:span 2}
+.tile:nth-child(4){grid-column:2/4}
+.tile img{transform:scale(1.25);transition:transform 1.8s var(--out)}
+.tile::after{content:"";position:absolute;inset:0;background:var(--bg);transform-origin:top;transition:transform 1.3s var(--ease)}
+body.ready .tile::after{transform:scaleY(0)}
+body.ready .tile img{transform:scale(1.04)}
+.tile:nth-child(2)::after{transition-delay:.15s}.tile:nth-child(3)::after{transition-delay:.3s}.tile:nth-child(4)::after{transition-delay:.45s}
+.tile .cap{position:absolute;left:18px;bottom:16px;z-index:2;font-family:var(--en);font-size:11px;letter-spacing:.16em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.3)}
+
+/* statement (ref: RooMin 세로선 + 우측정렬 문구) */
+.statement{padding:140px 0}
+.statement .wrap{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:start}
+.statement p.big{font-size:clamp(22px,2.6vw,34px);line-height:1.6;font-weight:300;letter-spacing:-.03em}
+.statement p.big .w{opacity:.15;transition:opacity .4s}
+.statement p.big .w.on{opacity:1}
+.vline{display:flex;gap:28px;align-items:stretch;text-align:right;font-size:14px;line-height:1.9;color:var(--gray)}
+.vline::after{content:"";width:2px;background:var(--ink);transform-origin:top;transform:scaleY(0);transition:transform 1.2s var(--out)}
+.vline.in::after{transform:none}
+
+/* horizontal gallery */
+.hscroll{position:relative}
+.h-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.h-head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 40px;margin-bottom:40px}
+.h-head h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1}
+.h-head h2 em{color:var(--cherry)}
+.h-track{display:flex;gap:24px;padding-left:40px;will-change:transform}
+.h-card{flex:0 0 auto;width:min(380px,72vw)}
+.h-card:nth-child(even){margin-top:70px}
+.h-card .im{aspect-ratio:4/5;overflow:hidden;margin-bottom:16px}
+.h-card .im img{transition:transform 1s var(--out)}
+.h-card:hover .im img{transform:scale(1.07)}
+.h-card div.t{display:flex;justify-content:space-between;font-size:14px}
+.h-card div.t span{font-family:var(--en);color:var(--gray);font-size:12px}
+.h-prog{position:absolute;left:40px;right:40px;bottom:40px;height:1px;background:var(--line)}
+.h-prog i{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+
+/* color of the month */
+.color{padding:150px 0;background:#f1ece7}
+.color .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hand{position:relative;aspect-ratio:1;max-width:520px;width:100%;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff,#ede4dc 70%)}
+.hand svg{width:100%;height:100%}
+.nail{transition:fill .8s var(--out)}
+.color h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,4.6vw,64px);line-height:1.05;margin:16px 0 22px}
+.color p.d{color:#5c5652;line-height:1.8;max-width:420px}
+.chips{display:flex;gap:14px;margin:38px 0 22px;flex-wrap:wrap}
+.chip{width:54px;height:54px;border-radius:50%;border:0;cursor:pointer;position:relative;transition:transform .4s var(--out)}
+.chip::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--ink);opacity:0;transform:scale(.8);transition:.4s var(--out)}
+.chip:hover{transform:translateY(-4px)}
+.chip.on::after{opacity:1;transform:none}
+.c-name{font-family:var(--display);font-style:italic;font-size:26px}
+.c-name small{font-family:var(--en);font-style:normal;font-size:12px;color:var(--gray);letter-spacing:.12em;margin-left:10px}
+
+/* menu list with hover image */
+.menu{padding:150px 0}
+.menu-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px;flex-wrap:wrap;gap:20px}
+.menu-head h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1}
+.cat{display:flex;gap:8px}
+.cat button{font-family:var(--en);font-size:12px;letter-spacing:.1em;padding:9px 18px;border:1px solid var(--line);background:none;border-radius:30px;cursor:pointer;transition:.3s}
+.cat button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.m-row{display:grid;grid-template-columns:60px 1fr 1fr 140px;align-items:center;padding:30px 0;border-top:1px solid var(--line);position:relative;transition:padding .5s var(--out),color .3s}
+.m-row:last-child{border-bottom:1px solid var(--line)}
+.m-row::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--out);z-index:-1}
+.m-row:hover{color:var(--bg);padding-left:24px;padding-right:24px}
+.m-row:hover::before{transform:none}
+.m-row .no{font-family:var(--en);font-size:12px;opacity:.6}
+.m-row h3{font-weight:500;font-size:22px;letter-spacing:-.03em}
+.m-row p{font-size:14px;opacity:.65}
+.m-row b{font-family:var(--en);font-weight:400;font-size:18px;text-align:right}
+.m-row.hide{display:none}
+.float-img{position:fixed;left:0;top:0;width:240px;height:300px;pointer-events:none;z-index:30;overflow:hidden;opacity:0;transform:translate(-50%,-50%) scale(.7);transition:opacity .3s,transform .4s var(--out)}
+.float-img.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* insta */
+.insta{padding:0 0 150px}
+.insta-head{text-align:center;margin-bottom:46px}
+.insta-head h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4vw,54px);margin-top:10px}
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.insta-grid a{aspect-ratio:1;overflow:hidden;position:relative}
+.insta-grid a::after{content:"♡ VIEW";position:absolute;inset:0;background:rgba(21,20,19,.55);color:#fff;display:grid;place-items:center;font-family:var(--en);font-size:12px;letter-spacing:.2em;opacity:0;transition:.4s}
+.insta-grid a:hover::after{opacity:1}
+.insta-grid img{transition:transform .8s var(--out)}
+.insta-grid a:hover img{transform:scale(1.1)}
+
+/* footer (big type) */
+footer{background:var(--ink);color:var(--bg);padding:110px 0 36px;overflow:hidden}
+.f-cta{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:90px}
+.f-cta h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6vw,96px);line-height:1}
+.f-cta h2 em{color:var(--blush)}
+.circle-btn{width:170px;height:170px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;text-align:center;font-family:var(--en);font-size:13px;letter-spacing:.12em;transition:background .4s,color .4s;flex-shrink:0}
+.circle-btn:hover{background:var(--blush);color:var(--ink);border-color:var(--blush)}
+.f-info{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;font-size:14px;line-height:1.9;color:#b7b1ab;padding-bottom:70px}
+.f-info h4{font-family:var(--en);font-weight:400;font-size:11px;letter-spacing:.2em;color:#6f6a65;margin-bottom:12px}
+.f-giant{font-family:var(--display);font-size:20vw;line-height:.8;letter-spacing:-.04em;white-space:nowrap;color:#262422;text-align:center}
+.f-bot{display:flex;justify-content:space-between;font-family:var(--en);font-size:11px;color:#6f6a65;letter-spacing:.1em;padding-top:30px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:1.1s var(--out)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:1024px){
+  .color .wrap{grid-template-columns:1fr}
+  .m-row{grid-template-columns:40px 1fr 110px}
+  .m-row p{display:none}
+  .f-info{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .wrap{padding:0 20px}
+  header .wrap{height:64px}
+  nav{display:none;position:fixed;inset:64px 0 auto;flex-direction:column;background:#000;padding:30px 20px;gap:20px}
+  body.open nav{display:flex}
+  body.open header{mix-blend-mode:normal;background:#000}
+  .hero h1{font-size:44px}
+  .m-toggle{display:block}
+  .hero{padding:110px 0 40px}
+  .hero-top{flex-direction:column;align-items:flex-start;gap:20px}
+  .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:200px 140px 140px}
+  .tile:nth-child(1){grid-row:auto;grid-column:span 2}
+  .tile:nth-child(4){grid-column:span 2}
+  .statement{padding:90px 0}
+  .statement .wrap{grid-template-columns:1fr}
+  .h-head{padding:0 20px}.h-track{padding-left:20px}.h-prog{left:20px;right:20px}
+  .h-card:nth-child(even){margin-top:30px}
+  .color,.menu{padding:90px 0}
+  .m-row{padding:22px 0}.m-row h3{font-size:18px}
+  .float-img{display:none}
+  .insta-grid{grid-template-columns:repeat(3,1fr)}
+  .f-info{grid-template-columns:1fr}
+  .circle-btn{width:130px;height:130px}
+}
+</style>
+</head>
+<body>
+<div class="loader"><span><i>Moment.</i></span></div>
+<div class="cursor"></div>
+<div class="float-img"><img src="" alt=""></div>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="logo">Moment <i>Nail Lab</i></a>
+    <nav>
+      <a href="#about"><span data-t="About">About</span></a>
+      <a href="#gallery"><span data-t="Gallery">Gallery</span></a>
+      <a href="#color"><span data-t="Color">Color</span></a>
+      <a href="#menu"><span data-t="Menu">Menu</span></a>
+      <a href="#contact"><span data-t="Booking">Booking</span></a>
+    </nav>
+    <button class="m-toggle">MENU</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <h1><span class="row"><span>Small detail,</span></span><span class="row"><span><em>big</em> moment.</span></span></h1>
+      <p class="hero-desc">손끝과 눈매, 가장 작은 부분이 하루의 기분을 바꿉니다. 모먼트 네일랩은 손 모양과 피부 톤에 맞춘 1:1 디자인을 제안합니다.</p>
+    </div>
+    <div class="mosaic">
+      <div class="tile" data-depth="12"><img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=1400&q=80" alt=""><span class="cap">GEL ART</span></div>
+      <div class="tile" data-depth="22"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80" alt=""><span class="cap">SEASON</span></div>
+      <div class="tile" data-depth="18"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80" alt=""><span class="cap">LASH</span></div>
+      <div class="tile" data-depth="8"><img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=1400&q=80" alt=""><span class="cap">CARE</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement" id="about">
+  <div class="wrap">
+    <p class="big" id="words">우리는 유행을 그대로 옮기지 않습니다. 손톱의 모양, 손등의 톤, 평소 즐겨 입는 옷의 색까지 살펴 오직 당신에게 어울리는 하나의 디자인을 완성합니다. 오래 지속되고, 자연스럽게 자라나는 아름다움을 위해.</p>
+    <div class="vline rv"><p>Since 2019<br>Seongsu, Seoul<br><br>Nail · Lash · Care<br>1:1 Private Booking</p></div>
+  </div>
+</section>
+
+<!-- HORIZONTAL GALLERY -->
+<section class="hscroll" id="gallery">
+  <div class="h-sticky">
+    <div class="h-head">
+      <h2>Recent <em>works</em></h2>
+      <p class="label"><b id="hCount">01</b> / 07</p>
+    </div>
+    <div class="h-track">
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80" alt=""></div><div class="t">마블 브라운 체크<span>GEL ART</span></div></div>
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=800&q=80" alt=""></div><div class="t">라벤더 그레이 원톤<span>BASIC</span></div></div>
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=800&q=80" alt=""></div><div class="t">체리 레터링<span>CUSTOM</span></div></div>
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=800&q=80" alt=""></div><div class="t">누드 글로우 케어<span>CARE</span></div></div>
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80" alt=""></div><div class="t">내추럴 볼륨 래쉬<span>LASH</span></div></div>
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=800&q=80" alt=""></div><div class="t">와인 포인트 프렌치<span>GEL ART</span></div></div>
+      <div class="h-card"><div class="im"><img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=800&q=80" alt=""></div><div class="t">젤 연장 & 쉐입<span>EXTENSION</span></div></div>
+    </div>
+    <div class="h-prog"><i></i></div>
+  </div>
+</section>
+
+<!-- COLOR OF THE MONTH -->
+<section class="color" id="color">
+  <div class="wrap">
+    <div class="hand rv">
+      <svg viewBox="0 0 400 400">
+        <g fill="#efd3c3" stroke="#d9b7a3" stroke-width="2">
+          <rect x="108" y="120" width="38" height="170" rx="19"/>
+          <rect x="152" y="80" width="40" height="210" rx="20"/>
+          <rect x="198" y="70" width="40" height="220" rx="20"/>
+          <rect x="244" y="95" width="38" height="195" rx="19"/>
+          <path d="M100 250 Q100 340 200 350 Q300 340 290 250 Z"/>
+          <rect x="285" y="200" width="36" height="110" rx="18" transform="rotate(-30 303 255)"/>
+        </g>
+        <g class="nails" stroke="rgba(0,0,0,.06)">
+          <rect class="nail" x="115" y="126" width="24" height="34" rx="12"/>
+          <rect class="nail" x="159" y="86" width="26" height="36" rx="13"/>
+          <rect class="nail" x="205" y="76" width="26" height="36" rx="13"/>
+          <rect class="nail" x="251" y="101" width="24" height="34" rx="12"/>
+          <rect class="nail" x="292" y="206" width="22" height="30" rx="11" transform="rotate(-30 303 255)"/>
+        </g>
+        <g fill="#fff" opacity=".45"><rect x="120" y="131" width="5" height="14" rx="2.5"/><rect x="165" y="91" width="5" height="15" rx="2.5"/><rect x="211" y="81" width="5" height="15" rx="2.5"/><rect x="256" y="106" width="5" height="14" rx="2.5"/></g>
+      </svg>
+    </div>
+    <div>
+      <p class="label rv">Color of the month · <b>November</b></p>
+      <h2 class="rv">이달의 컬러를<br>미리 입혀보세요</h2>
+      <p class="d rv">칩을 눌러 손끝에 바로 적용해 보세요. 이달의 컬러로 시술 시 원톤 젤 10% 할인이 적용됩니다.</p>
+      <div class="chips rv">
+        <button class="chip on" style="background:#8e2b36" data-c="#8e2b36" data-n="Cherry Wine" data-k="체리 와인"></button>
+        <button class="chip" style="background:#d9b9a6" data-c="#d9b9a6" data-n="Milk Nude" data-k="밀크 누드"></button>
+        <button class="chip" style="background:#6e5a4e" data-c="#6e5a4e" data-n="Cocoa Bean" data-k="코코아 빈"></button>
+        <button class="chip" style="background:#a8a2b8" data-c="#a8a2b8" data-n="Mist Lilac" data-k="미스트 라일락"></button>
+        <button class="chip" style="background:#3d4a3f" data-c="#3d4a3f" data-n="Deep Olive" data-k="딥 올리브"></button>
+      </div>
+      <p class="c-name rv" id="cName">Cherry Wine<small>체리 와인</small></p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <h2 class="rv">Menu</h2>
+      <div class="cat rv">
+        <button class="on" data-f="all">ALL</button>
+        <button data-f="nail">NAIL</button>
+        <button data-f="lash">LASH</button>
+        <button data-f="care">CARE</button>
+      </div>
+    </div>
+    <div class="m-list">
+      <div class="m-row" data-c="nail" data-img="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=500&q=80"><span class="no">01</span><h3>원톤 젤</h3><p>케어 포함 · 60분</p><b>₩55,000</b></div>
+      <div class="m-row" data-c="nail" data-img="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&q=80"><span class="no">02</span><h3>디자인 젤 아트</h3><p>시즌 · 커스텀 디자인 · 90분</p><b>₩75,000~</b></div>
+      <div class="m-row" data-c="nail" data-img="https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=500&q=80"><span class="no">03</span><h3>젤 연장</h3><p>10손가락 쉐입 연장 · 120분</p><b>₩110,000</b></div>
+      <div class="m-row" data-c="lash" data-img="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=500&q=80"><span class="no">04</span><h3>내추럴 속눈썹 연장</h3><p>J · C컬 120가닥 · 70분</p><b>₩70,000</b></div>
+      <div class="m-row" data-c="lash" data-img="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80"><span class="no">05</span><h3>래쉬 리프트</h3><p>펌 + 영양 코팅 · 50분</p><b>₩60,000</b></div>
+      <div class="m-row" data-c="care" data-img="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=500&q=80"><span class="no">06</span><h3>핸드 스파 케어</h3><p>각질 · 보습 팩 · 40분</p><b>₩45,000</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTA -->
+<section class="insta">
+  <div class="wrap">
+    <div class="insta-head"><p class="label rv">Instagram</p><h2 class="rv">@moment.nail.lab</h2></div>
+    <div class="insta-grid rv">
+      <a href="#"><img src="https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=400&q=80" alt=""></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=400&q=80" alt=""></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80" alt=""></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80" alt=""></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt=""></a>
+      <a href="#"><img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=400&q=80" alt=""></a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="f-cta">
+      <h2>Book your<br><em>moment.</em></h2>
+      <a href="#" class="circle-btn">BOOK<br>NOW →</a>
+    </div>
+    <div class="f-info">
+      <div><h4>ADDRESS</h4>서울시 성동구 연무장길 00<br>2층 모먼트 네일랩</div>
+      <div><h4>HOURS</h4>화–일 11:00 – 21:00<br>월요일 휴무</div>
+      <div><h4>CONTACT</h4>010. 1234. 5678<br>카카오톡 @momentnail</div>
+      <div><h4>FOLLOW</h4>Instagram<br>Naver Blog</div>
+    </div>
+  </div>
+  <div class="f-giant">Moment</div>
+  <div class="wrap f-bot"><span>© MOMENT NAIL LAB</span><span>사업자 000-00-00000</span></div>
+</footer>
+
+<script>
+// loader
+addEventListener('load',()=>setTimeout(()=>document.body.classList.add('ready'),700));
+setTimeout(()=>document.body.classList.add('ready'),3000);
+document.querySelector('.m-toggle').onclick=()=>document.body.classList.toggle('open');
+document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>document.body.classList.remove('open'));
+
+// cursor
+const cur=document.querySelector('.cursor');
+let mx=0,my=0,cx=0,cy=0;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*.2;cy+=(my-cy)*.2;cur.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.h-card,.tile').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+// mosaic mouse parallax
+const tiles=[...document.querySelectorAll('.tile')];
+document.querySelector('.mosaic').addEventListener('mousemove',e=>{
+  const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+  tiles.forEach(t=>{const d=+t.dataset.depth;t.querySelector('img').style.transform=`scale(1.1) translate(${x*d}px,${y*d}px)`});
+});
+
+// statement words light up on scroll
+const wp=document.getElementById('words');
+wp.innerHTML=wp.textContent.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
+const ws=[...wp.querySelectorAll('.w')];
+
+// horizontal scroll section
+const hs=document.querySelector('.hscroll'),track=document.querySelector('.h-track'),bar=document.querySelector('.h-prog i'),hc=document.getElementById('hCount');
+function sizeH(){hs.style.height=(track.scrollWidth-innerWidth+innerHeight+80)+'px'}
+addEventListener('resize',sizeH);addEventListener('load',sizeH);sizeH();
+
+function onScroll(){
+  const r=wp.getBoundingClientRect(),p=Math.min(Math.max((innerHeight*.8-r.top)/(r.height+innerHeight*.3),0),1);
+  ws.forEach((w,i)=>w.classList.toggle('on',i/ws.length<p));
+
+  const hr=hs.getBoundingClientRect(),max=track.scrollWidth-innerWidth+80;
+  const hp=Math.min(Math.max(-hr.top/(hs.offsetHeight-innerHeight),0),1);
+  track.style.transform=`translateX(${-hp*max}px)`;
+  bar.style.transform=`scaleX(${hp})`;
+  hc.textContent=String(Math.min(7,Math.floor(hp*6.99)+1)).padStart(2,'0');
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// color chips
+const nails=[...document.querySelectorAll('.nail')],chips=[...document.querySelectorAll('.chip')],cn=document.getElementById('cName');
+function paint(c){nails.forEach((n,i)=>setTimeout(()=>n.setAttribute('fill',c.dataset.c),i*90));cn.innerHTML=`${c.dataset.n}<small>${c.dataset.k}</small>`}
+chips.forEach(c=>c.onclick=()=>{chips.forEach(x=>x.classList.toggle('on',x===c));paint(c)});
+paint(chips[0]);
+
+// menu filter + floating image
+document.querySelectorAll('.cat button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.cat button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.m-row').forEach(r=>r.classList.toggle('hide',b.dataset.f!=='all'&&r.dataset.c!==b.dataset.f));
+});
+const fi=document.querySelector('.float-img'),fimg=fi.querySelector('img');
+let fx=0,fy=0;
+document.querySelectorAll('.m-row').forEach(r=>{
+  r.addEventListener('mouseenter',()=>{fimg.src=r.dataset.img;fi.classList.add('on')});
+  r.addEventListener('mouseleave',()=>fi.classList.remove('on'));
+});
+addEventListener('mousemove',e=>{fi.style.left=e.clientX+160+'px';fi.style.top=e.clientY+'px'});
+</script>
+</body>
+</html>
