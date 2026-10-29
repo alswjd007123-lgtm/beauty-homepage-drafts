@@ -61,6 +61,11 @@ h1{font-size:clamp(26px,4vw,38px);font-weight:400;text-align:center}
 .pv-box{position:relative;overflow:hidden;background:#fff;border-radius:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
 .pv-box iframe{position:absolute;top:0;left:0;border:0;background:#fff;transform-origin:0 0}
 .pv.is-mobile .pv-box{border-radius:28px;outline:8px solid #1d1a22}
+/* 핸드폰의 데스크탑 보기: 실제 페이지 대신 PC 화면 전체 캡처 이미지를 스크롤해서 본다 */
+.pv-shot{position:relative;width:100%;max-width:720px;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;border-radius:12px;background:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.pv-shot[hidden],.pv-box[hidden]{display:none}
+.pv-shot img{display:block;width:100%;height:auto}
+.pv-shot .tag{position:sticky;top:8px;z-index:1;display:table;margin:8px auto -36px;padding:6px 12px;border-radius:999px;background:rgba(30,24,36,.72);color:#fff;font-size:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .pv-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px 16px;flex:none}
 .pv-name{font-size:17px}
 .pv-name small{display:block;font-size:13px;color:rgba(255,255,255,.7)}
@@ -288,7 +293,10 @@ fieldset.field{border:0;min-width:0}
     <button type="button" class="pv-mode" data-mode="mobile" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>모바일</button>
     <button type="button" class="pv-close" aria-label="미리보기 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
   </div>
-  <div class="pv-stage"><div class="pv-box"><iframe title="시안 미리보기 화면"></iframe></div></div>
+  <div class="pv-stage">
+    <div class="pv-box"><iframe title="시안 미리보기 화면"></iframe></div>
+    <div class="pv-shot" hidden><span class="tag">PC 화면 전체 미리보기 · 위아래로 넘겨 보세요</span><img alt="" decoding="async"></div>
+  </div>
   <div class="pv-bottom">
     <p class="pv-name"></p>
     <div class="pv-actions">
@@ -317,6 +325,13 @@ const pvModes = pv.querySelectorAll('.pv-mode');
 // 데스크탑은 높이를 최대 900px로 제한한다 (핸드폰에서 너무 큰 화면을 그리면 메모리가 부족해 브라우저가 꺼진다)
 const SIZES = { desktop: { w: 1280, h: 900 }, mobile: { w: 390, h: 844 } };
 let pvMode = 'desktop';
+const pvShot = pv.querySelector('.pv-shot');
+const pvShotImg = pvShot.querySelector('img');
+let pvHref = '';
+let pvShotSrc = '';
+// 핸드폰·태블릿 폭에서는 데스크탑 보기를 캡처 이미지로 대신한다
+// (아이폰 사파리·카카오톡 브라우저는 PC 크기 페이지를 iframe으로 띄우면 메모리 부족으로 꺼진다)
+const useShot = () => pvMode === 'desktop' && window.innerWidth < 1024;
 
 // 화면 크기에 맞춰 iframe을 축소해 보여 준다 (안쪽 페이지는 실제 폭 기준으로 그려진다)
 function fitPreview() {
@@ -337,13 +352,26 @@ function setMode(mode) {
   pvMode = mode;
   pv.classList.toggle('is-mobile', mode === 'mobile');
   pvModes.forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode ? 'true' : 'false'));
+  if (useShot()) {
+    // iframe을 비워 메모리를 돌려주고 캡처 이미지를 보여 준다
+    if (pvFrame.getAttribute('src') !== 'about:blank') pvFrame.src = 'about:blank';
+    pvBox.hidden = true;
+    pvShot.hidden = false;
+    if (pvShotImg.getAttribute('src') !== pvShotSrc) { pvShotImg.src = pvShotSrc; pvShot.scrollTop = 0; }
+    return;
+  }
+  pvShot.hidden = true;
+  pvBox.hidden = false;
+  if (pvFrame.getAttribute('src') !== pvHref) pvFrame.src = pvHref;
   fitPreview();
 }
 
 function openPreview(href, tpl) {
   pv.querySelector('.pv-name').innerHTML = `${tpl.querySelector('h2').textContent}<small>${tpl.querySelector('.no').textContent}</small>`;
   pv.querySelector('.pv-open').href = href;
-  pvFrame.src = href;
+  pvHref = href;
+  pvShotSrc = `images/full/design-${href.match(/시안(\d)/)[1]}.jpg`;
+  pvShotImg.alt = `${tpl.querySelector('h2').textContent} PC 화면 전체 캡처`;
   // 휴대폰으로 볼 때는 모바일 화면부터 보여 준다
   pv.showModal();
   setMode(window.innerWidth < 768 ? 'mobile' : 'desktop');
@@ -359,8 +387,8 @@ tpls.forEach(tpl => {
 pvModes.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
 pv.querySelector('.pv-close').addEventListener('click', () => pv.close());
 pv.addEventListener('click', e => { if (e.target === pv || e.target === pvStage) pv.close(); });
-pv.addEventListener('close', () => { pvFrame.src = 'about:blank'; document.body.style.overflow = ''; });
-window.addEventListener('resize', () => { if (pv.open) fitPreview(); });
+pv.addEventListener('close', () => { pvFrame.src = 'about:blank'; pvShotImg.removeAttribute('src'); document.body.style.overflow = ''; });
+window.addEventListener('resize', () => { if (pv.open) setMode(pvMode); });
 
 // 상담 예약 신청
 const cForm = document.getElementById('consultForm');
