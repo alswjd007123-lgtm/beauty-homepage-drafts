@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>온브로우 ON BROW</title>
+<meta name="description" content="얼굴에 맞춘 눈썹 디자인, 온브로우. 눈썹 모양과 진하기를 미리 그려 보는 반영구 눈썹 1인샵">
+<meta property="og:title" content="온브로우 ON BROW">
+<meta property="og:description" content="눈썹 모양과 진하기를 미리 그려 보고 상담하는 반영구 눈썹 1인샵">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="header" id="header">
+  <a class="logo" href="#top" aria-label="온브로우 처음으로">ON <span aria-hidden="true">◆</span> BROW</a>
+  <nav class="nav" id="nav" aria-label="주요 메뉴">
+    <a href="#preview">눈썹 미리보기</a>
+    <a href="#menu">시술 메뉴</a>
+    <a href="#process">시술 과정</a>
+    <a href="#faq">자주 묻는 질문</a>
+    <a href="#visit">오시는 길</a>
+    <a class="nav-cta" href="#visit">상담 예약</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+</header>
+
+<main id="main">
+  <!-- 1. 히어로 -->
+  <section class="hero" id="top">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="frame reveal">
+      <p class="eyebrow">반영구 눈썹 1인샵</p>
+      <h1>눈썹 하나로<br><em>인상</em>이 정리돼요.</h1>
+      <div class="rule" aria-hidden="true"><span></span>◆<span></span></div>
+      <p class="lead">얼굴 비율을 먼저 재고, 모양과 진하기를 그려서 보여 드려요.<br>마음에 들 때까지 디자인한 다음에 시작해요.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#preview">내 눈썹 미리 그려 보기</a>
+        <a class="btn btn-line" href="#visit">상담 예약</a>
+      </div>
+    </div>
+    <svg class="hero-brow reveal" id="heroBrow" viewBox="0 0 520 140" aria-hidden="true"></svg>
+  </section>
+
+  <!-- 2. 눈썹 미리보기 -->
+  <section class="section" id="preview" aria-labelledby="preview-title">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Brow Preview</p>
+      <h2 id="preview-title">모양과 진하기를 골라 보세요</h2>
+      <p>상담 때 실제 얼굴에 펜슬로 그려서 한 번 더 맞춰요.</p>
+    </div>
+    <div class="preview glass reveal">
+      <div class="canvas">
+        <svg id="browFace" viewBox="60 70 400 150" role="img" aria-label="선택한 눈썹 모양 미리보기"></svg>
+      </div>
+      <div class="controls">
+        <fieldset>
+          <legend>눈썹 모양</legend>
+          <div class="opts" data-key="shape">
+            <button type="button" data-v="straight" aria-pressed="false">일자</button>
+            <button type="button" data-v="soft" aria-pressed="true">소프트 아치</button>
+            <button type="button" data-v="arch" aria-pressed="false">아치</button>
+            <button type="button" data-v="angle" aria-pressed="false">각진 아치</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>진하기</legend>
+          <div class="opts" data-key="tone">
+            <button type="button" data-v="light" aria-pressed="false">연하게</button>
+            <button type="button" data-v="natural" aria-pressed="true">자연스럽게</button>
+            <button type="button" data-v="bold" aria-pressed="false">또렷하게</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>표현 방식</legend>
+          <div class="opts" data-key="style">
+            <button type="button" data-v="hair" aria-pressed="true">결 표현</button>
+            <button type="button" data-v="shade" aria-pressed="false">음영</button>
+          </div>
+        </fieldset>
+        <p class="desc" id="browDesc" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 시술 메뉴 -->
+  <section class="section" id="menu" aria-labelledby="menu-title">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Menu</p>
+      <h2 id="menu-title">시술 메뉴</h2>
+    </div>
+    <div class="menu">
+      <article class="item glass reveal"><p class="no">I</p><h3>결 눈썹</h3><p>한 올씩 결을 그려 자연스럽게 채워요.</p><p class="won">00,000원</p></article>
+      <article class="item glass featured reveal"><p class="no">II</p><h3>콤보 눈썹</h3><p>앞머리는 결, 꼬리는 음영으로 또렷하게.</p><p class="won">00,000원</p><span class="badge">원장 PICK</span></article>
+      <article class="item glass reveal"><p class="no">III</p><h3>음영 눈썹</h3><p>파우더를 바른 듯 부드럽게 채워요.</p><p class="won">00,000원</p></article>
+    </div>
+    <ul class="extra reveal">
+      <li><span>리터치</span><b>00,000원</b></li>
+      <li><span>타샵 시술 후 수정</span><b>상담 후 안내</b></li>
+      <li><span>리터치 포함 여부·기간</span><b>[확인 필요]</b></li>
+    </ul>
+    <p class="note reveal">가격은 샵 확인 후 채우는 자리예요 [확인 필요]. 상담만 받고 시술하지 않으셔도 괜찮아요.</p>
+  </section>
+
+  <!-- 4. 시술 과정 -->
+  <section class="section" id="process" aria-labelledby="process-title">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Process</p>
+      <h2 id="process-title">이 순서로 진행해요</h2>
+    </div>
+    <ol class="steps">
+      <li class="reveal"><span>01</span><h3>얼굴 비율 측정</h3><p>눈썹 시작점·끝점·가장 높은 점을 얼굴 비율로 잡아요.</p></li>
+      <li class="reveal"><span>02</span><h3>디자인 확인</h3><p>펜슬로 먼저 그리고, 거울로 함께 보며 고쳐요.</p></li>
+      <li class="reveal"><span>03</span><h3>안내와 동의</h3><p>주의 사항과 사후 관리를 설명드리고 동의서를 받아요.</p></li>
+      <li class="reveal"><span>04</span><h3>시술과 리터치</h3><p>자리 잡은 뒤 리터치로 빈 곳을 채워요. 시기는 [확인 필요]</p></li>
+    </ol>
+    <div class="safety glass reveal">
+      <h3>위생과 안전</h3>
+      <p>사용하는 도구·색소 제품명, 일회용 여부, 시술자 자격 정보를 이곳에 그대로 공개해요 [확인 필요].</p>
+    </div>
+  </section>
+
+  <!-- 5. 후기 -->
+  <section class="section" id="review" aria-labelledby="review-title">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Review</p>
+      <h2 id="review-title">다녀가신 분들의 이야기</h2>
+      <p>실제 후기만 원문 그대로, 출처와 함께 보여 드려요.</p>
+    </div>
+    <div class="reviews">
+      <figure class="glass reveal"><blockquote>네이버 예약 리뷰 한 줄이 들어가는 자리예요.</blockquote><figcaption>작성일 · 시술명 · 출처</figcaption></figure>
+      <figure class="glass reveal"><blockquote>전후 사진은 고객 동의를 받은 것만 올려요.</blockquote><figcaption>작성일 · 시술명 · 출처</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="sec-head reveal">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq">
+      <details class="glass reveal"><summary>얼마나 유지되나요?</summary><p>피부 타입과 생활 습관에 따라 차이가 커요. 상담 때 피부를 보고 안내해 드려요.</p></details>
+      <details class="glass reveal"><summary>시술 직후 색이 진해 보이나요?</summary><p>시술 직후와 자리 잡은 뒤의 색감이 다를 수 있어요. 과정별 변화는 사후 관리 안내에 담아 드려요.</p></details>
+      <details class="glass reveal"><summary>시술을 받으면 안 되는 경우도 있나요?</summary><p>임신 중이거나 피부 질환이 있는 경우 등은 상담 때 꼭 말씀해 주세요. 시술이 어려운 경우 솔직하게 안내해 드려요.</p></details>
+      <details class="glass reveal"><summary>예약 변경·취소는요?</summary><p>변경·취소 기준과 예약금·노쇼 정책 [확인 필요]</p></details>
+    </div>
+  </section>
+
+  <!-- 7. 예약·오시는 길 -->
+  <section class="section" id="visit" aria-labelledby="visit-title">
+    <div class="visit glass reveal">
+      <div class="v-left">
+        <p class="eyebrow">Reservation</p>
+        <h2 id="visit-title">상담부터 편하게 예약하세요</h2>
+        <div class="channels">
+          <a class="ch ch-naver" href="#">네이버 예약</a>
+          <a class="ch ch-kakao" href="#">카카오톡 상담</a>
+          <a class="ch ch-tel" href="#">전화 [확인 필요]</a>
+        </div>
+      </div>
+      <dl class="info">
+        <dt>주소</dt><dd>[확인 필요]</dd>
+        <dt>영업시간</dt><dd>[확인 필요]</dd>
+        <dt>휴무</dt><dd>[확인 필요]</dd>
+        <dt>주차</dt><dd>[확인 필요]</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p class="logo">ON ◆ BROW</p>
+  <p>상호 [확인 필요] · 대표 [확인 필요] · 사업자등록번호 [확인 필요]</p>
+  <p>시술자 자격·신고 정보 [확인 필요]</p>
+  <p><a href="#">개인정보처리방침</a> · <a href="#">이용약관</a></p>
+  <p>이 페이지는 홈페이지 시안이며 그림은 모두 예시예요.</p>
+</footer>
+
+<nav class="bottom-bar" aria-label="빠른 연락">
+  <a href="#">전화</a>
+  <a href="#">카톡 상담</a>
+  <a class="on" href="#visit">상담 예약</a>
+</nav>
+
+<script src="js/main.js"></script>
+</body>
+</html>
