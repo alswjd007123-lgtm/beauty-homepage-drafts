@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>뷰티샵 홈페이지 시안</title>
-<meta name="description" content="피부관리·네일·속눈썹·헤어 뷰티샵 홈페이지 시안 6종">
+<title>홈페이지 시안</title>
+<meta name="description" content="뷰티샵·카페·숙소·퍼스널 트레이닝 홈페이지 시안 9종">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#f6ece6;--bg2:#e8e6f3;--ink:#2a2530;--sub:#6b6372;--glass:rgba(255,255,255,.45);--edge:rgba(255,255,255,.7);--line:rgba(42,37,48,.12);--dim:rgba(30,24,36,.62)}
@@ -135,14 +135,17 @@ fieldset.field{border:0;min-width:0}
 </head>
 <body>
 <main>
-  <h1>뷰티샵 홈페이지 시안</h1>
-  <p class="lead">여섯 가지 시안을 눌러 확인해 보세요.</p>
+  <h1>홈페이지 시안</h1>
+  <p class="lead">아홉 가지 시안을 눌러 확인해 보세요.</p>
 
   <nav class="filter" aria-label="업종별 시안 보기">
     <button type="button" data-f="all" aria-pressed="true">전체</button>
     <button type="button" data-f="skin" aria-pressed="false">피부·에스테틱</button>
     <button type="button" data-f="nail" aria-pressed="false">네일·속눈썹</button>
     <button type="button" data-f="hair" aria-pressed="false">헤어</button>
+    <button type="button" data-f="cafe" aria-pressed="false">카페·식당</button>
+    <button type="button" data-f="stay" aria-pressed="false">숙박·여행</button>
+    <button type="button" data-f="fit" aria-pressed="false">운동·건강</button>
   </nav>
 
   <section class="list" aria-label="시안 목록">
@@ -205,6 +208,36 @@ fieldset.field{border:0;min-width:0}
       <h2><a href="시안6/index.html">아뜰리에 온도</a></h2>
       <span class="no">시안 6 · 헤어살롱</span>
     </article>
+
+    <article class="tpl" data-cat="cafe">
+      <div class="shot">
+        <img src="images/thumbs/design-7.jpg" alt="윤슬 로스터스 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안7/index.html" aria-label="시안 7 윤슬 로스터스 보러 가기"></a>
+        <div class="over"><p>옐로·와인 컬러의 키네틱 타이포. 사진 슬라이드 아래로 흐르는 거대한 글자 띠와 원두 취향 찾기.</p><a class="btn" href="시안7/index.html">자세히 보기</a><a class="btn" href="시안7/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안7/index.html">윤슬 로스터스</a></h2>
+      <span class="no">시안 7 · 로스터리 카페</span>
+    </article>
+
+    <article class="tpl" data-cat="stay">
+      <div class="shot">
+        <img src="images/thumbs/design-8.jpg" alt="물결채 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안8/index.html" aria-label="시안 8 물결채 보러 가기"></a>
+        <div class="over"><p>리퀴드 글래스 스타일. 바다 사진 위에 겹친 유리 예약 바와 객실별 사진 갤러리.</p><a class="btn" href="시안8/index.html">자세히 보기</a><a class="btn" href="시안8/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안8/index.html">물결채</a></h2>
+      <span class="no">시안 8 · 바닷가 독채 스테이</span>
+    </article>
+
+    <article class="tpl" data-cat="fit">
+      <div class="shot">
+        <img src="images/thumbs/design-9.jpg" alt="포지 퍼스널 트레이닝 메인 화면 미리보기" width="960" height="667" loading="lazy">
+        <a class="cover" href="시안9/index.html" aria-label="시안 9 포지 퍼스널 트레이닝 보러 가기"></a>
+        <div class="over"><p>다크 스위스 그리드. 초대형 타이포와 흑백 사진, 마우스를 따라오는 프로그램 사진과 단계형 체험 신청.</p><a class="btn" href="시안9/index.html">자세히 보기</a><a class="btn" href="시안9/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+      </div>
+      <h2><a href="시안9/index.html">포지 퍼스널 트레이닝</a></h2>
+      <span class="no">시안 9 · 퍼스널 트레이닝</span>
+    </article>
   </section>
 
   <section class="consult" id="consult" aria-labelledby="consult-title">
@@ -228,6 +261,9 @@ fieldset.field{border:0;min-width:0}
           <option>헤어</option>
           <option>왁싱</option>
           <option>반영구</option>
+          <option>카페·식당</option>
+          <option>숙박·펜션</option>
+          <option>운동·PT</option>
           <option>기타</option>
         </select>
       </label>
@@ -241,6 +277,9 @@ fieldset.field{border:0;min-width:0}
           <label><input type="checkbox" name="관심 시안" value="시안 4 결 에스테틱"><span>시안 4 · 결</span></label>
           <label><input type="checkbox" name="관심 시안" value="시안 5 루미 래쉬"><span>시안 5 · 루미</span></label>
           <label><input type="checkbox" name="관심 시안" value="시안 6 아뜰리에 온도"><span>시안 6 · 온도</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 7 윤슬 로스터스"><span>시안 7 · 윤슬</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 8 물결채"><span>시안 8 · 물결채</span></label>
+          <label><input type="checkbox" name="관심 시안" value="시안 9 포지 퍼스널 트레이닝"><span>시안 9 · 포지</span></label>
         </div>
       </fieldset>
 
