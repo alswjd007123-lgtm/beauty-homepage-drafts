@@ -5,250 +5,441 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>홈페이지 시안</title>
 <meta name="description" content="뷰티샵·카페·숙소·퍼스널 트레이닝 홈페이지 시안 9종">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--bg1:#f6ece6;--bg2:#e8e6f3;--ink:#2a2530;--sub:#6b6372;--glass:rgba(255,255,255,.45);--edge:rgba(255,255,255,.7);--line:rgba(42,37,48,.12);--dim:rgba(30,24,36,.62)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{min-height:100vh;font-family:'Gowun Dodum',sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--bg1),var(--bg2));padding:56px 16px 72px;position:relative;overflow-x:hidden}
-body::before,body::after{content:"";position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(90px);z-index:-1;opacity:.55}
-body::before{background:#f3b9a7;top:-120px;left:-100px}
-body::after{background:#b9b3ea;bottom:-140px;right:-100px}
-main{max-width:1120px;margin:0 auto}
-h1{font-size:clamp(26px,4vw,38px);font-weight:400;text-align:center}
-.lead{text-align:center;color:var(--sub);margin:12px 0 28px}
-
-/* 업종 필터 */
-.filter{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:36px}
-.filter button{min-height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font:inherit;font-size:15px;color:var(--sub);cursor:pointer;transition:background .25s,color .25s}
-.filter button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-/* 템플릿 목록 */
-.list{display:grid;grid-template-columns:1fr;gap:36px 24px}
-.tpl{text-align:center}
-.tpl[hidden]{display:none}
-.shot{position:relative;aspect-ratio:1440/1000;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.6);border:1px solid var(--line);box-shadow:0 14px 34px -20px rgba(60,40,70,.45);transition:transform .35s,box-shadow .35s}
-.shot img{display:block;width:100%;height:100%;max-width:100%;object-fit:cover;object-position:top;transition:transform 1.2s ease}
-.shot .cover{position:absolute;inset:0;z-index:1}
-.over{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;background:var(--dim);opacity:0;transition:opacity .3s;pointer-events:none}
-.over p{max-width:300px;color:#fff;font-size:14px;line-height:1.6;margin-bottom:4px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-width:190px;min-height:44px;padding:0 22px;border:1px solid rgba(255,255,255,.85);border-radius:12px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#fff;font-size:16px;text-decoration:none;transition:background .25s,color .25s}
-.btn:hover,.btn:focus-visible{background:#fff;color:var(--ink)}
-.tpl h2{margin-top:14px;font-size:18px;font-weight:400}
-.tpl h2 a{color:inherit;text-decoration:none}
-.no{display:block;margin-top:4px;font-size:13px;color:var(--sub)}
-
-/* 마우스가 있는 기기: 올리면 덮개와 버튼 표시 */
-@media (hover:hover){
-  .shot:hover,.shot:focus-within{transform:translateY(-6px);box-shadow:0 24px 44px -22px rgba(60,40,70,.55)}
-  .shot:hover img{transform:scale(1.04)}
-  .shot:hover .over,.shot:focus-within .over{opacity:1;pointer-events:auto}
+/* =========================================================
+   메인 갤러리 — 레퍼런스: goodside.studio (land-book 소개)
+   흰 배경 + 1px 가로줄 + 초대형 세리프 워드마크 + 흐르는 사진 콜라주 + 2열 작업 목록
+   ========================================================= */
+:root{
+  --paper:#f8f6f1;--ink:#141312;--sub:#5e5a54;--rule:#141312;--soft:rgba(20,19,18,.14);
+  --gold:#b08a3e;--glass:rgba(255,255,255,.55);--edge:rgba(255,255,255,.75);
+  --ease:cubic-bezier(.22,1,.36,1);--move:cubic-bezier(.77,0,.175,1);
+  --kr:'Gowun Dodum',sans-serif;--serif:'Gowun Batang',serif;--en:'Instrument Serif','Gowun Batang',serif;
+  --gutter:clamp(16px,2vw,24px)
 }
-/* 터치 기기: 사진을 누르면 바로 시안으로 이동 */
-@media (hover:none){.over{display:none}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:var(--kr);color:var(--ink);background:var(--paper);overflow-x:hidden;word-break:keep-all;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+[hidden]{display:none!important}
+.small-caps{font-family:var(--en);text-transform:uppercase;letter-spacing:.04em}
+.it{font-family:var(--en);font-style:italic}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* 노이즈 질감 */
+.noise{position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-/* 미리보기 창 (데스크탑 / 모바일 전환) */
-.pv{width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;background:transparent;color:#fff;overflow:hidden}
-.pv::backdrop{background:rgba(20,16,26,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.pv[open]{display:flex;flex-direction:column}
-.pv-top{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 64px 12px 16px;position:relative;flex:none}
-.pv-mode{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font:inherit;font-size:15px;cursor:pointer;transition:background .25s,color .25s}
-.pv-mode svg{width:18px;height:18px}
-.pv-mode[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
-.pv-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer}
-.pv-close svg{width:28px;height:28px}
-.pv-close:hover,.pv-close:focus-visible{background:rgba(255,255,255,.15)}
-.pv-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px 16px 12px}
-.pv-box{position:relative;overflow:hidden;background:#fff;border-radius:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
-.pv-box iframe{position:absolute;top:0;left:0;border:0;background:#fff;transform-origin:0 0}
-.pv.is-mobile .pv-box{border-radius:28px;outline:8px solid #1d1a22}
-/* 핸드폰의 데스크탑 보기: 실제 페이지 대신 PC 화면 전체 캡처 이미지를 스크롤해서 본다 */
-.pv-shot{position:relative;width:100%;max-width:720px;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;border-radius:12px;background:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
-.pv-shot[hidden],.pv-box[hidden]{display:none}
-.pv-shot img{display:block;width:100%;height:auto}
-.pv-shot .tag{position:sticky;top:8px;z-index:1;display:table;margin:8px auto -36px;padding:6px 12px;border-radius:999px;background:rgba(30,24,36,.72);color:#fff;font-size:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.pv-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px 16px;flex:none}
-.pv-name{font-size:17px}
-.pv-name small{display:block;font-size:13px;color:rgba(255,255,255,.7)}
-.pv-open{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:12px;background:#fff;color:var(--ink);text-decoration:none;font-size:15px;white-space:nowrap}
-.pv-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.pv-ask{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:12px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.12);color:#fff;font:inherit;font-size:15px;white-space:nowrap;cursor:pointer}
-.pv-ask:hover,.pv-ask:focus-visible{background:rgba(255,255,255,.25)}
+/* 상단 메뉴: 작은 대문자 + 가운데 해 문양 */
+.nav{position:sticky;top:0;z-index:60;border-bottom:1px solid var(--rule);background:rgba(248,246,241,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 var(--gutter)}
+.nav-links{display:none}
+.nav a.nl{position:relative;font-size:15px;padding:8px 0}
+.nav a.nl::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.nav a.nl .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin-right:6px;vertical-align:middle;transform:scale(0);transition:transform .35s var(--ease)}
+.nav a.nl.on .dot{transform:scale(1)}
+.m-logo{font-family:var(--serif);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.sun{width:38px;height:38px;color:var(--gold);animation:sunspin 40s linear infinite}
+.sun-wrap{display:none}
+@keyframes sunspin{to{transform:rotate(360deg)}}
+.m-btn{min-height:44px;padding:0 4px;border:0;background:none;font-size:15px;display:flex;align-items:center;gap:6px}
+.m-btn::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink)}
+/* 모바일 전체 메뉴 */
+.m-menu{position:fixed;inset:0;z-index:70;background:var(--paper);display:flex;flex-direction:column;padding:0 var(--gutter) 32px;clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--move);visibility:hidden}
+body.menu-open .m-menu{clip-path:inset(0);visibility:visible}
+.m-menu-head{display:flex;justify-content:space-between;align-items:center;height:52px;border-bottom:1px solid var(--rule)}
+.m-menu nav{display:flex;flex-direction:column;margin-top:24px}
+.m-menu nav a{font-family:var(--serif);font-size:clamp(36px,11vw,56px);line-height:1.25;border-bottom:1px solid var(--soft);padding:10px 0;opacity:0;transform:translateY(30px);transition:opacity .5s,transform .7s var(--ease)}
+body.menu-open .m-menu nav a{opacity:1;transform:none}
+body.menu-open .m-menu nav a:nth-child(2){transition-delay:.06s}
+body.menu-open .m-menu nav a:nth-child(3){transition-delay:.12s}
+body.menu-open .m-menu nav a:nth-child(4){transition-delay:.18s}
+.m-menu .it{margin-top:auto;font-family:var(--serif);font-style:normal;font-size:19px;line-height:1.5;color:var(--sub)}
+
+/* 워드마크 + 소개 띠 */
+.band{border-bottom:1px solid var(--rule)}
+.wordmark{font-family:var(--serif);font-weight:700;line-height:.92;letter-spacing:-.05em;white-space:nowrap;padding:18px var(--gutter) 22px;overflow:hidden}
+.wm-in{display:inline-block}
+.wordmark .ch{display:inline-block;transform:translateY(105%);transition:transform 1.1s var(--ease);transition-delay:calc(var(--i)*60ms + .1s)}
+.loaded .wordmark .ch{transform:none}
+.tagline{display:grid;gap:16px;padding:16px var(--gutter);border-top:1px solid var(--rule)}
+.tagline h1{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.2vw,28px);line-height:1.3;letter-spacing:-.02em}
+.tagline p{font-size:15px;line-height:1.6;color:var(--sub);max-width:340px}
+/* 줄 단위 마스크 등장 */
+.mask{display:block;overflow:hidden}
+.mask > span{display:block;transform:translateY(110%);transition:transform 1s var(--ease)}
+.mask.in > span{transform:none}
+.mask:nth-child(2) > span{transition-delay:.1s}
+
+/* 팝 퍼레이드 콜라주 (레퍼런스: animos.app Pop Parade)
+   크기가 다른 카드가 높이를 달리해 흩어진 채 왼쪽으로 행진하고,
+   오른쪽에서 튕기듯 팝 하며 나타났다가 왼쪽 끝에서 쏙 줄어들며 사라진다. 위치·크기는 JS가 계산 */
+.collage{position:relative;overflow:hidden;height:118vw;margin:clamp(24px,4vw,48px) 0}
+.collage-track{position:absolute;inset:0}
+.cell{position:absolute;left:0;top:0;border:0;padding:0;background:#e9e5dc;border-radius:14px;overflow:hidden;text-align:left;transform:scale(0);will-change:transform;box-shadow:0 18px 40px -24px rgba(20,19,18,.5);transition:box-shadow .4s}
+.cell .ph{position:absolute;inset:0}
+.cell .ph img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1s var(--ease)}
+.cell .cap{position:absolute;left:8px;right:8px;bottom:8px;z-index:1;padding:8px 12px;border-radius:10px;background:rgba(248,246,241,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease),transform .5s var(--ease)}
+.cell .cap b{display:block;font-weight:400;font-size:13px}
+.cell .cap b::before{content:"• "}
+.cell .cap i{font-family:var(--serif);font-style:normal;font-size:12px;color:var(--sub)}
+.cell:focus-visible .cap{opacity:1;transform:none}
+
+/* 가운데 소개 */
+.about{text-align:center;padding:clamp(48px,7vw,96px) var(--gutter) clamp(64px,9vw,120px)}
+.about h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,34px);line-height:1.2}
+.about h2 .it{display:block;font-size:1.05em}
+.ornament{width:56px;height:56px;margin:22px auto;color:var(--gold);transition:transform 1.2s var(--ease)}
+.about:hover .ornament{transform:rotate(90deg)}
+.about p{max-width:440px;margin:0 auto 18px;font-size:16px;line-height:1.75;color:var(--sub)}
+.stars{font-family:var(--en);letter-spacing:.4em;color:var(--sub)}
+
+/* 작업 목록: 섹션 머리 + 업종 필터 */
+.section-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px var(--gutter);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.section-head h2{font-weight:400;font-size:15px}
+.section-head h2 span{color:var(--sub)}
+.filter{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 calc(var(--gutter)*-1);padding:0 var(--gutter);width:calc(100% + var(--gutter)*2)}
+.filter::-webkit-scrollbar{display:none}
+.filter button{flex:none;min-height:44px;padding:0 12px;border:0;background:none;font-size:14px;color:var(--sub);position:relative;transition:color .3s}
+.filter button::after{content:"";position:absolute;left:12px;right:12px;bottom:9px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.filter button[aria-pressed="true"]{color:var(--ink)}
+.filter button[aria-pressed="true"]::after{transform:scaleX(1)}
+
+.list{display:grid;grid-template-columns:1fr;gap:40px var(--gutter);padding:var(--gutter) var(--gutter) 24px}
+.tpl{position:relative;opacity:0;transform:translateY(60px);transition:opacity .9s,transform 1.1s var(--ease);transition-delay:var(--d,0s)}
+.tpl.in{opacity:1;transform:none}
+.tpl[hidden]{display:none}
+.shot{position:relative;aspect-ratio:1440/1000;overflow:hidden;background:#e9e5dc}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
+.shot .cover{position:absolute;inset:0;z-index:1}
+.shot .view{position:absolute;right:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font-family:var(--en);font-size:15px;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s var(--ease);pointer-events:none}
+.meta{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-top:10px}
+.meta-l{display:flex;gap:8px;align-items:baseline}
+.meta .dot{flex:none;width:6px;height:6px;border-radius:50%;background:var(--ink);transform:translateY(-2px);transition:transform .45s var(--ease)}
+.tpl h2{font-weight:400;font-size:16px;line-height:1.3}
+.tpl h2 a{transition:opacity .3s}
+.no{display:block;margin-top:2px;font-family:var(--serif);font-size:14px;color:var(--sub)}
+.new-tab{flex:none;font-size:14px;color:var(--sub);min-height:44px;display:inline-flex;align-items:flex-start;padding-top:2px;transition:color .3s}
+/* 시안 정보표: 스타일 · 컬러 · 서체 */
+.spec{margin-top:6px;border-top:1px solid var(--soft)}
+.spec > div{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--soft);font-size:14px;line-height:1.55}
+.spec dt{font-family:var(--en);font-size:13px;letter-spacing:.04em;color:var(--sub)}
+.spec dd{margin:0}
+.spec dd small{display:block;font-family:var(--serif);font-size:13px;color:var(--sub)}
+.sw-list{display:flex;flex-wrap:wrap;gap:6px 12px}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;white-space:nowrap}
+.sw i{flex:none;width:16px;height:16px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(20,19,18,.15);transition:transform .4s var(--ease)}
+.sw code{font-family:var(--en);font-size:13px;color:var(--sub)}
+.tpl .spec > div{opacity:0;transform:translateY(12px);transition:opacity .6s,transform .8s var(--ease)}
+.tpl.in .spec > div{opacity:1;transform:none}
+.tpl.in .spec > div:nth-child(1){transition-delay:.25s}
+.tpl.in .spec > div:nth-child(2){transition-delay:.35s}
+.tpl.in .spec > div:nth-child(3){transition-delay:.45s}
 
 /* 상담 예약 신청 */
-.consult{position:relative;margin-top:88px;padding:36px 20px;border-radius:28px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 24px 50px -28px rgba(60,40,70,.45);overflow:hidden;scroll-margin-top:24px}
-.consult::before{content:"";position:absolute;inset:0;opacity:.06;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.consult > *{position:relative}
-.c-head{text-align:center;margin-bottom:28px}
-.c-head .eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.55);font-size:13px;color:var(--sub)}
-.c-head h2{margin-top:12px;font-size:clamp(24px,3.4vw,32px);font-weight:400}
-.c-head p{margin-top:10px;color:var(--sub);line-height:1.7}
-.c-form{display:grid;grid-template-columns:1fr;gap:16px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field > span,.field legend{font-size:14px;color:var(--ink)}
-.field em{font-style:normal;color:#c0566b}
+.consult{border-top:1px solid var(--rule);margin-top:clamp(56px,8vw,96px);padding:clamp(56px,8vw,96px) var(--gutter);display:grid;gap:40px;scroll-margin-top:52px}
+.c-head .eyebrow{font-size:14px}
+.c-head h2{margin-top:14px;font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
+.c-head h2 .it{display:block}
+.c-head p{margin-top:18px;color:var(--sub);line-height:1.7;max-width:360px}
+.c-form{display:grid;grid-template-columns:1fr;gap:22px;padding:clamp(20px,3vw,36px);background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.8);border-radius:20px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 30px 60px -40px rgba(20,19,18,.35)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field > span,.field legend{font-size:14px;color:var(--sub)}
+.field em{font-style:normal;color:#a3402f}
 fieldset.field{border:0;min-width:0}
-/* legend는 flex 간격(gap)이 적용되지 않아 따로 아래 여백을 준다 */
 .field legend{padding:0;margin-bottom:10px}
-.c-form input[type="text"],.c-form input[type="tel"],.c-form input[type="date"],.c-form select,.c-form textarea{width:100%;min-height:48px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.6);font:inherit;font-size:16px;color:var(--ink)}
-.c-form textarea{min-height:110px;resize:vertical}
-.c-form input:focus,.c-form select:focus,.c-form textarea:focus{outline:2px solid var(--ink);outline-offset:1px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
+.c-form input[type="text"],.c-form input[type="tel"],.c-form input[type="date"],.c-form select,.c-form textarea{width:100%;min-height:48px;padding:10px 2px;border:0;border-bottom:1px solid var(--soft);border-radius:0;background:transparent;font:inherit;font-size:16px;color:var(--ink);transition:border-color .3s}
+.c-form textarea{min-height:96px;resize:vertical}
+.c-form input:focus,.c-form select:focus,.c-form textarea:focus{outline:none;border-bottom-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips label{position:relative}
 .chips input{position:absolute;opacity:0;width:1px;height:1px}
-.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.45);font-size:15px;color:var(--sub);cursor:pointer;transition:background .2s,color .2s}
-.chips input:checked + span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--soft);border-radius:999px;font-size:14px;color:var(--sub);cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.chips input:checked + span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .chips input:focus-visible + span{outline:2px solid var(--ink);outline-offset:2px}
 .agree{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--sub);line-height:1.6;cursor:pointer}
 .agree input{flex:none;width:20px;height:20px;margin-top:2px;accent-color:var(--ink)}
-.c-submit{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border:0;border-radius:999px;background:#fee500;color:#3a1d1d;font:inherit;font-size:17px;cursor:pointer;box-shadow:0 14px 28px -14px rgba(120,100,0,.6);transition:transform .25s,opacity .25s}
+.c-submit{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;border:1px solid var(--ink);border-radius:999px;background:#fee500;color:#3a1d1d;font-size:17px;transition:transform .25s var(--ease),opacity .25s}
+.c-submit::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);transform:translateY(101%);transition:transform .5s var(--move)}
 .c-submit svg{width:22px;height:22px}
-.c-submit:hover{transform:translateY(-2px)}
-.c-submit:disabled{opacity:.6;cursor:wait;transform:none}
+.c-submit:disabled{opacity:.6;cursor:wait}
 .c-msg{min-height:1.6em;text-align:center;font-size:15px;line-height:1.6}
-.c-msg.ok{color:#2f7a55}
-.c-msg.err{color:#b2455b}
-.c-note{margin-top:4px;text-align:center;font-size:13px;color:var(--sub);line-height:1.7}
-/* 연락 채널 (인스타그램 · 카카오톡 · 전화) */
-.contact{margin-top:28px}
-.contact h2{text-align:center;font-size:20px;font-weight:400;margin-bottom:16px}
-.ch-list{display:grid;grid-template-columns:1fr;gap:12px;max-width:420px;margin:0 auto}
-.ch{display:flex;align-items:center;gap:16px;min-height:76px;padding:16px 20px;border-radius:20px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 30px -20px rgba(60,40,70,.4);color:var(--ink);text-decoration:none;transition:transform .3s,box-shadow .3s}
-.ch:hover,.ch:focus-visible{transform:translateY(-4px);box-shadow:0 20px 38px -20px rgba(60,40,70,.5)}
-.ch .ic{flex:none;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;color:#fff}
-.ch .ic svg{width:24px;height:24px}
-.ch-insta .ic{background:linear-gradient(135deg,#f9a03f,#e1306c 55%,#8a3ab9)}
-.ch b{display:block;font-weight:400;font-size:17px}
-.ch small{display:block;margin-top:2px;font-size:14px;color:var(--sub)}
-.ch .arrow{margin-left:auto;color:var(--sub)}
-.foot{margin-top:40px;text-align:center;font-size:13px;color:var(--sub)}
+.c-msg.ok{color:#2f6b4c}
+.c-msg.err{color:#a3402f}
+.c-note{font-size:13px;color:var(--sub);line-height:1.7}
 
-@media (min-width:768px){
-  .consult{padding:52px 48px}
-  .c-form{grid-template-columns:1fr 1fr;gap:20px 18px}
-  .c-form .full{grid-column:1 / -1}
+/* 푸터: 기울임 문구 / 장식 / 링크 */
+.foot{display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px;padding:28px var(--gutter) 32px;border-top:1px solid var(--rule)}
+.foot .it{font-family:var(--serif);font-style:normal;font-size:19px;line-height:1.45}
+.foot .it a{display:inline-block;margin-top:8px;font-style:normal;font-size:16px;border-bottom:1px solid var(--ink)}
+.foot .sun-sm{display:none;width:32px;height:32px;color:var(--gold);animation:sunspin 40s linear infinite}
+.socials{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:15px}
+.socials a{min-height:32px;display:inline-flex;align-items:center;transition:opacity .3s}
+.copy{grid-column:1/-1;font-size:13px;color:var(--sub)}
+
+/* 미리보기 창 (데스크탑 / 모바일 전환) */
+.pv{width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;background:transparent;color:#fff;overflow:hidden}
+.pv::backdrop{background:rgba(20,19,18,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.pv[open]{display:flex;flex-direction:column;animation:pvIn .5s var(--ease)}
+@keyframes pvIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.pv-top{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 64px 12px 16px;position:relative;flex:none}
+.pv-mode{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font-size:15px;transition:background .25s,color .25s}
+.pv-mode svg{width:18px;height:18px}
+.pv-mode[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
+.pv-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#fff;transition:background .25s,transform .4s var(--ease)}
+.pv-close svg{width:26px;height:26px}
+.pv-close:hover,.pv-close:focus-visible{background:rgba(255,255,255,.15);transform:translateY(-50%) rotate(90deg)}
+.pv-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:4px 16px 12px}
+.pv-box{position:relative;overflow:hidden;background:#fff;border-radius:8px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.pv-box iframe{position:absolute;top:0;left:0;border:0;background:#fff;transform-origin:0 0}
+.pv.is-mobile .pv-box{border-radius:28px;outline:8px solid #1d1a22}
+/* 핸드폰의 데스크탑 보기: 실제 페이지 대신 PC 화면 전체 캡처 이미지를 스크롤해서 본다 */
+.pv-shot{position:relative;width:100%;max-width:720px;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;border-radius:8px;background:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.pv-shot[hidden],.pv-box[hidden]{display:none}
+.pv-shot img{display:block;width:100%;height:auto}
+.pv-shot .tag{position:sticky;top:8px;z-index:1;display:table;margin:8px auto -36px;padding:6px 12px;border-radius:999px;background:rgba(20,19,18,.72);color:#fff;font-size:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.pv-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px 16px;flex:none}
+.pv-name{font-family:var(--serif);font-size:18px}
+.pv-name small{display:block;font-family:var(--serif);font-size:14px;color:rgba(255,255,255,.7)}
+.pv-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pv-open{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#fff;color:var(--ink);font-size:15px;white-space:nowrap;transition:transform .3s var(--ease)}
+.pv-ask{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.1);color:#fff;font-size:15px;white-space:nowrap;transition:background .25s}
+.pv-ask:hover,.pv-ask:focus-visible{background:rgba(255,255,255,.25)}
+
+/* 스크롤 등장 */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s,transform 1.1s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+/* 마우스가 있는 기기 */
+@media (hover:hover) and (pointer:fine){
+  .nav a.nl:hover::after{transform:scaleX(1)}
+  .cell:hover{box-shadow:0 30px 60px -24px rgba(20,19,18,.6)}
+  .cell:hover .ph img{transform:scale(1.06)}
+  .cell:hover .cap{opacity:1;transform:none}
+  .tpl:hover .shot img{transform:scale(1.05)}
+  .tpl:hover .meta .dot{transform:translateY(-2px) scale(1.9)}
+  .tpl:hover .shot .view{opacity:1;transform:none}
+  .tpl h2 a:hover{opacity:.55}
+  .sw:hover i{transform:scale(1.35)}
+  .new-tab:hover{color:var(--ink)}
+  .filter button:hover{color:var(--ink)}
+  .chips span:hover{border-color:var(--ink);color:var(--ink)}
+  .c-submit:hover{color:#fee500}
+  .c-submit:hover::before{transform:none}
+  .socials a:hover,.foot .it a:hover{opacity:.45}
+  .pv-open:hover{transform:translateY(-2px)}
 }
 
-@media (min-width:768px){.list{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1024px){.list{grid-template-columns:repeat(3,1fr)}}
-@media (prefers-reduced-motion:reduce){.shot,.shot img,.over,.btn,.filter button,.pv-mode,.chips span,.c-submit,.ch{transition:none}.ch:hover{transform:none}.shot:hover img,.c-submit:hover{transform:none}}
+@media (min-width:768px){
+  .tagline{grid-template-columns:1fr auto;align-items:start}
+  .list{grid-template-columns:repeat(2,1fr);gap:56px var(--gutter)}
+  .filter{width:auto;margin:0;padding:0}
+  .consult{grid-template-columns:1fr 1.4fr;gap:56px}
+  .c-head{position:sticky;top:90px;align-self:start}
+  .c-form{grid-template-columns:1fr 1fr;gap:24px 20px}
+  .c-form .full{grid-column:1 / -1}
+  .foot{grid-template-columns:1fr auto 1fr}
+  .foot .sun-sm{display:block;justify-self:center}
+  .copy{text-align:left}
+}
+@media (min-width:1024px){
+  .nav-in{display:grid;grid-template-columns:1fr 1fr auto 1fr 1fr;height:48px}
+  .nav-links{display:contents}
+  .nav-links a:nth-child(2),.nav-links a:nth-child(4){justify-self:center}
+  .nav-links a:nth-child(5){justify-self:end}
+  .sun-wrap{display:block;justify-self:center}
+  .m-logo,.m-btn{display:none}
+  .list{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:768px){.collage{height:clamp(440px,48vw,680px)}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sun,.foot .sun-sm{animation:none}
+  .wordmark .ch,.mask > span{transform:none;transition:none}
+  .rv,.tpl,.tpl .spec > div{transform:none;transition:opacity .4s}
+  .cell .ph img,.shot img,.ornament,.m-menu,.m-menu nav a,.c-submit::before{transition:none}
+  .m-menu nav a{transform:none}
+  .pv[open]{animation:none}
+}
 </style>
 </head>
 <body>
-<main>
-  <h1>홈페이지 시안</h1>
-  <p class="lead">아홉 가지 시안을 눌러 확인해 보세요.</p>
+<div class="noise" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sun" viewBox="0 0 100 100"><g fill="currentColor"><circle cx="50" cy="50" r="15"/><g id="rays"><path d="M50 4l3 22h-6z"/><path d="M50 96l-3-22h6z"/><path d="M4 50l22-3v6z"/><path d="M96 50l-22 3v-6z"/></g><use href="#rays" transform="rotate(22.5 50 50)"/><use href="#rays" transform="rotate(45 50 50)"/><use href="#rays" transform="rotate(67.5 50 50)"/></g></symbol>
+  </defs>
+</svg>
 
-  <nav class="filter" aria-label="업종별 시안 보기">
-    <button type="button" data-f="all" aria-pressed="true">전체</button>
-    <button type="button" data-f="skin" aria-pressed="false">피부·에스테틱</button>
-    <button type="button" data-f="nail" aria-pressed="false">네일·속눈썹</button>
-    <button type="button" data-f="hair" aria-pressed="false">헤어</button>
-    <button type="button" data-f="cafe" aria-pressed="false">카페·식당</button>
-    <button type="button" data-f="stay" aria-pressed="false">숙박·여행</button>
-    <button type="button" data-f="fit" aria-pressed="false">운동·건강</button>
+<header class="nav" id="top">
+  <div class="nav-in small-caps">
+    <a href="#top" class="m-logo" aria-label="홈페이지 시안 처음으로"><svg class="sun" aria-hidden="true"><use href="#sun"/></svg></a>
+    <div class="nav-links">
+      <a href="#top" class="nl on"><span class="dot" aria-hidden="true"></span>Home</a>
+      <a href="#work" class="nl"><span class="dot" aria-hidden="true"></span>시안</a>
+      <span class="sun-wrap"><svg class="sun" aria-hidden="true"><use href="#sun"/></svg></span>
+      <a href="#about" class="nl"><span class="dot" aria-hidden="true"></span>소개</a>
+      <a href="#consult" class="nl"><span class="dot" aria-hidden="true"></span>상담 신청</a>
+    </div>
+    <button type="button" class="m-btn" aria-expanded="false" aria-controls="mMenu">Menu</button>
+  </div>
+</header>
+
+<div class="m-menu" id="mMenu" aria-label="전체 메뉴">
+  <div class="m-menu-head small-caps"><span class="m-logo">홈페이지 시안</span><button type="button" class="m-btn m-close" aria-label="메뉴 닫기">Close</button></div>
+  <nav>
+    <a href="#top">처음으로</a>
+    <a href="#work">시안 보기</a>
+    <a href="#about">소개</a>
+    <a href="#consult">상담 신청</a>
   </nav>
+  <p class="it">사진과 움직임으로<br>기억에 남는 홈페이지를 만들어요.</p>
+</div>
+
+<main>
+  <!-- 초대형 워드마크 + 소개 띠 -->
+  <section class="band" aria-label="소개">
+    <p class="wordmark" id="wordmark" aria-hidden="true">홈페이지 시안</p>
+    <div class="tagline">
+      <h1><span class="mask"><span>사진과 움직임으로</span></span><span class="mask"><span>기억에 남는 홈페이지</span></span></h1>
+      <p class="mask"><span>뷰티샵부터 카페, 숙소, 퍼스널 트레이닝까지. 업종마다 다른 분위기로 만든 시안 아홉 가지를 둘러보세요.</span></p>
+    </div>
+  </section>
+
+  <!-- 흐르는 사진 콜라주 (사진을 누르면 미리보기) -->
+  <section class="collage" aria-label="시안 사진 모음">
+    <div class="collage-track" id="track">
+      <button type="button" class="cell c1" data-i="0"><span class="cap small-caps"><b>SOOM Skin &amp; Spa</b><i>피부관리·스파</i></span><span class="ph"><img src="images/thumbs/design-1.jpg" alt="시안 1 SOOM Skin &amp; Spa"></span></button>
+      <button type="button" class="cell c2" data-i="6"><span class="cap small-caps"><b>윤슬 로스터스</b><i>로스터리 카페</i></span><span class="ph"><img src="images/thumbs/design-7.jpg" alt="시안 7 윤슬 로스터스"></span></button>
+      <button type="button" class="cell c3" data-i="1"><span class="cap small-caps"><b>Moment Nail Lab</b><i>네일·속눈썹</i></span><span class="ph"><img src="images/thumbs/design-2.jpg" alt="시안 2 Moment Nail Lab"></span></button>
+      <button type="button" class="cell c4" data-i="4"><span class="cap small-caps"><b>루미 래쉬</b><i>속눈썹 1인샵</i></span><span class="ph"><img src="images/thumbs/design-5.jpg" alt="시안 5 루미 래쉬"></span></button>
+      <button type="button" class="cell c5" data-i="7"><span class="cap small-caps"><b>물결채</b><i>바닷가 독채 스테이</i></span><span class="ph"><img src="images/thumbs/design-8.jpg" alt="시안 8 물결채"></span></button>
+      <button type="button" class="cell c6" data-i="5"><span class="cap small-caps"><b>아뜰리에 온도</b><i>헤어살롱</i></span><span class="ph"><img src="images/thumbs/design-6.jpg" alt="시안 6 아뜰리에 온도"></span></button>
+      <button type="button" class="cell c7" data-i="2"><span class="cap small-caps"><b>hairmood</b><i>헤어살롱</i></span><span class="ph"><img src="images/thumbs/design-3.jpg" alt="시안 3 hairmood"></span></button>
+      <button type="button" class="cell c8" data-i="8"><span class="cap small-caps"><b>포지</b><i>퍼스널 트레이닝</i></span><span class="ph"><img src="images/thumbs/design-9.jpg" alt="시안 9 포지 퍼스널 트레이닝"></span></button>
+      <button type="button" class="cell c9" data-i="3"><span class="cap small-caps"><b>결 에스테틱</b><i>에스테틱</i></span><span class="ph"><img src="images/thumbs/design-4.jpg" alt="시안 4 결 에스테틱"></span></button>
+    </div>
+  </section>
+
+  <!-- 가운데 소개 -->
+  <section class="about" id="about">
+    <h2 class="rv">만들고 싶은 분위기부터<span class="it">let’s imagine</span></h2>
+    <svg class="ornament rv" aria-hidden="true"><use href="#sun"/></svg>
+    <p class="rv">오래 기억되는 가게에는 저마다의 분위기가 있어요. 사진 한 장, 글자 하나, 화면이 움직이는 속도까지 그 분위기에 맞춰 다시 짓습니다.</p>
+    <p class="rv">마음에 드는 시안을 고르면, 그 위에 우리 가게의 사진과 이야기를 얹어 완성해 드려요.</p>
+    <p class="stars rv" aria-hidden="true">* * *</p>
+  </section>
+
+  <!-- 작업 목록 -->
+  <div class="section-head" id="work">
+    <h2 class="small-caps">전체 시안 <span>(9)</span></h2>
+    <nav class="filter small-caps" aria-label="업종별 시안 보기">
+      <button type="button" data-f="all" aria-pressed="true">전체</button>
+      <button type="button" data-f="skin" aria-pressed="false">피부·에스테틱</button>
+      <button type="button" data-f="nail" aria-pressed="false">네일·속눈썹</button>
+      <button type="button" data-f="hair" aria-pressed="false">헤어</button>
+      <button type="button" data-f="cafe" aria-pressed="false">카페·식당</button>
+      <button type="button" data-f="stay" aria-pressed="false">숙박·여행</button>
+      <button type="button" data-f="fit" aria-pressed="false">운동·건강</button>
+    </nav>
+  </div>
 
   <section class="list" aria-label="시안 목록">
     <article class="tpl" data-cat="skin">
       <div class="shot">
         <img src="images/thumbs/design-1.jpg" alt="SOOM Skin &amp; Spa 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안1/index.html" aria-label="시안 1 SOOM Skin &amp; Spa 보러 가기"></a>
-        <div class="over"><p>아이보리·세이지 톤의 차분한 고급형. 풀스크린 슬라이더와 시그니처 코스 소개.</p><a class="btn" href="시안1/index.html">자세히 보기</a><a class="btn" href="시안1/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안1/index.html">SOOM Skin &amp; Spa</a></h2>
-      <span class="no">시안 1 · 피부관리·스파</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안1/index.html">SOOM Skin &amp; Spa</a></h2><span class="no">시안 1 · 피부관리·스파</span></div></div><a class="new-tab small-caps" href="시안1/index.html" target="_blank" rel="noopener" aria-label="시안 1 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="nail">
       <div class="shot">
         <img src="images/thumbs/design-2.jpg" alt="Moment Nail Lab 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안2/index.html" aria-label="시안 2 Moment Nail Lab 보러 가기"></a>
-        <div class="over"><p>흰 바탕과 체리 포인트의 매거진형. 가로 스크롤 갤러리와 이달의 컬러 체험.</p><a class="btn" href="시안2/index.html">자세히 보기</a><a class="btn" href="시안2/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안2/index.html">Moment Nail Lab</a></h2>
-      <span class="no">시안 2 · 네일·속눈썹</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안2/index.html">Moment Nail Lab</a></h2><span class="no">시안 2 · 네일·속눈썹</span></div></div><a class="new-tab small-caps" href="시안2/index.html" target="_blank" rel="noopener" aria-label="시안 2 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="hair">
       <div class="shot">
         <img src="images/thumbs/design-3.jpg" alt="hairmood 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안3/index.html" aria-label="시안 3 hairmood 보러 가기"></a>
-        <div class="over"><p>코랄·버터 컬러의 경쾌한 스타일. 비포·애프터와 예약 채널 카드.</p><a class="btn" href="시안3/index.html">자세히 보기</a><a class="btn" href="시안3/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안3/index.html">hairmood</a></h2>
-      <span class="no">시안 3 · 헤어살롱</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안3/index.html">hairmood</a></h2><span class="no">시안 3 · 헤어살롱</span></div></div><a class="new-tab small-caps" href="시안3/index.html" target="_blank" rel="noopener" aria-label="시안 3 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="skin">
       <div class="shot">
         <img src="images/thumbs/design-4.jpg" alt="결 에스테틱 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안4/index.html" aria-label="시안 4 결 에스테틱 보러 가기"></a>
-        <div class="over"><p>대리석 럭셔리 스타일. 고민별 탭에 프로그램과 후기를 묶고, 방문 상담 예약 폼을 담았어요.</p><a class="btn" href="시안4/index.html">자세히 보기</a><a class="btn" href="시안4/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안4/index.html">결 에스테틱</a></h2>
-      <span class="no">시안 4 · 에스테틱</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안4/index.html">결 에스테틱</a></h2><span class="no">시안 4 · 에스테틱</span></div></div><a class="new-tab small-caps" href="시안4/index.html" target="_blank" rel="noopener" aria-label="시안 4 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="nail">
       <div class="shot">
         <img src="images/thumbs/design-5.jpg" alt="루미 래쉬 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안5/index.html" aria-label="시안 5 루미 래쉬 보러 가기"></a>
-        <div class="over"><p>파스텔 유기적 스타일. 눈매를 고르면 어울리는 속눈썹을 그려 주는 스타일 찾기.</p><a class="btn" href="시안5/index.html">자세히 보기</a><a class="btn" href="시안5/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안5/index.html">루미 래쉬</a></h2>
-      <span class="no">시안 5 · 속눈썹 1인샵</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안5/index.html">루미 래쉬</a></h2><span class="no">시안 5 · 속눈썹 1인샵</span></div></div><a class="new-tab small-caps" href="시안5/index.html" target="_blank" rel="noopener" aria-label="시안 5 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="hair">
       <div class="shot">
         <img src="images/thumbs/design-6.jpg" alt="아뜰리에 온도 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안6/index.html" aria-label="시안 6 아뜰리에 온도 보러 가기"></a>
-        <div class="over"><p>다크 에디토리얼 매거진. 페이지 번호가 있는 풀스크린 배너와 트렌드 룩북.</p><a class="btn" href="시안6/index.html">자세히 보기</a><a class="btn" href="시안6/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안6/index.html">아뜰리에 온도</a></h2>
-      <span class="no">시안 6 · 헤어살롱</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안6/index.html">아뜰리에 온도</a></h2><span class="no">시안 6 · 헤어살롱</span></div></div><a class="new-tab small-caps" href="시안6/index.html" target="_blank" rel="noopener" aria-label="시안 6 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="cafe">
       <div class="shot">
         <img src="images/thumbs/design-7.jpg" alt="윤슬 로스터스 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안7/index.html" aria-label="시안 7 윤슬 로스터스 보러 가기"></a>
-        <div class="over"><p>옐로·와인 컬러의 키네틱 타이포. 사진 슬라이드 아래로 흐르는 거대한 글자 띠와 원두 취향 찾기.</p><a class="btn" href="시안7/index.html">자세히 보기</a><a class="btn" href="시안7/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안7/index.html">윤슬 로스터스</a></h2>
-      <span class="no">시안 7 · 로스터리 카페</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안7/index.html">윤슬 로스터스</a></h2><span class="no">시안 7 · 로스터리 카페</span></div></div><a class="new-tab small-caps" href="시안7/index.html" target="_blank" rel="noopener" aria-label="시안 7 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="stay">
       <div class="shot">
         <img src="images/thumbs/design-8.jpg" alt="물결채 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안8/index.html" aria-label="시안 8 물결채 보러 가기"></a>
-        <div class="over"><p>리퀴드 글래스 스타일. 바다 사진 위에 겹친 유리 예약 바와 객실별 사진 갤러리.</p><a class="btn" href="시안8/index.html">자세히 보기</a><a class="btn" href="시안8/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안8/index.html">물결채</a></h2>
-      <span class="no">시안 8 · 바닷가 독채 스테이</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안8/index.html">물결채</a></h2><span class="no">시안 8 · 바닷가 독채 스테이</span></div></div><a class="new-tab small-caps" href="시안8/index.html" target="_blank" rel="noopener" aria-label="시안 8 새 창으로 열기">새 창 ↗</a></div>
     </article>
 
     <article class="tpl" data-cat="fit">
       <div class="shot">
         <img src="images/thumbs/design-9.jpg" alt="포지 퍼스널 트레이닝 메인 화면 미리보기" width="960" height="667" loading="lazy">
         <a class="cover" href="시안9/index.html" aria-label="시안 9 포지 퍼스널 트레이닝 보러 가기"></a>
-        <div class="over"><p>다크 스위스 그리드. 초대형 타이포와 흑백 사진, 마우스를 따라오는 프로그램 사진과 단계형 체험 신청.</p><a class="btn" href="시안9/index.html">자세히 보기</a><a class="btn" href="시안9/index.html" target="_blank" rel="noopener">새 창으로 열기</a></div>
+        <span class="view" aria-hidden="true">View →</span>
       </div>
-      <h2><a href="시안9/index.html">포지 퍼스널 트레이닝</a></h2>
-      <span class="no">시안 9 · 퍼스널 트레이닝</span>
+      <div class="meta"><div class="meta-l"><span class="dot" aria-hidden="true"></span><div><h2><a href="시안9/index.html">포지 퍼스널 트레이닝</a></h2><span class="no">시안 9 · 퍼스널 트레이닝</span></div></div><a class="new-tab small-caps" href="시안9/index.html" target="_blank" rel="noopener" aria-label="시안 9 새 창으로 열기">새 창 ↗</a></div>
     </article>
   </section>
 
   <section class="consult" id="consult" aria-labelledby="consult-title">
     <div class="c-head">
-      <span class="eyebrow">홈페이지 제작 상담</span>
-      <h2 id="consult-title">상담 예약 신청</h2>
-      <p>마음에 드는 시안을 고르고 내용을 적어 주세요.<br>카카오톡 오픈채팅으로 바로 상담해 드려요.</p>
+      <span class="eyebrow small-caps">홈페이지 제작 상담</span>
+      <h2 id="consult-title" class="rv">상담 예약 신청<span class="it">let’s begin</span></h2>
+      <p class="rv">마음에 드는 시안을 고르고 내용을 적어 주세요. 카카오톡 오픈채팅으로 바로 상담해 드려요.</p>
+      <p class="c-note rv">버튼을 누르면 작성한 내용이 복사되고 카카오톡 오픈채팅방이 열려요. 채팅창에 붙여넣어 보내 주시면 신청이 끝나요.</p>
     </div>
 
     <!-- 오픈채팅 주소 설정: 카카오톡 오픈채팅방의 링크(https://open.kakao.com/o/...)를 아래 data-openchat에 넣어 주세요 -->
-    <form class="c-form" id="consultForm" data-openchat="https://open.kakao.com/o/YOUR_OPENCHAT_ID" novalidate>
+    <form class="c-form rv" id="consultForm" data-openchat="https://open.kakao.com/o/YOUR_OPENCHAT_ID" novalidate>
       <label class="field"><span>성함 <em aria-hidden="true">*</em></span><input type="text" name="성함" autocomplete="name" required placeholder="홍길동"></label>
       <label class="field"><span>연락처 <em aria-hidden="true">*</em></span><input type="tel" name="연락처" autocomplete="tel" inputmode="tel" required placeholder="010-0000-0000"></label>
       <label class="field"><span>샵 이름</span><input type="text" name="샵 이름" placeholder="예: 루미 래쉬"></label>
@@ -310,23 +501,20 @@ fieldset.field{border:0;min-width:0}
       <button type="submit" class="c-submit full"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-1 3.6c-.1.4.3.7.6.5l4.3-2.8c.5.1 1 .1 1.4.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg><span>상담 신청하기</span></button>
       <p class="c-msg full" id="consultMsg" role="status" aria-live="polite"></p>
     </form>
-    <p class="c-note">버튼을 누르면 작성한 내용이 복사되고 카카오톡 오픈채팅방이 열려요.<br>채팅창에 붙여넣어 보내 주시면 신청이 끝나요.</p>
   </section>
-
-  <!-- 인스타그램: 아래 주소 끝에 실제 계정 아이디를 넣어 주세요 -->
-  <section class="contact" aria-labelledby="contact-title">
-    <h2 id="contact-title">작업물 더 보기</h2>
-    <div class="ch-list">
-      <a class="ch ch-insta" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램에서 작업물 보기 (새 창)">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-        <span><b>인스타그램</b><small>작업물·제작 후기 보기</small></span>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
-  <footer class="foot">© 2026 뷰티샵 홈페이지 제작. 모든 시안의 사진은 예시 이미지예요.</footer>
 </main>
+
+<!-- 인스타그램: 아래 주소 끝에 실제 계정 아이디를 넣어 주세요 -->
+<footer class="foot">
+  <p class="it">제작 상담과 작업물은<br>이곳에서 만나요<br><a href="#consult">상담 신청하기 →</a></p>
+  <svg class="sun-sm" aria-hidden="true"><use href="#sun"/></svg>
+  <nav class="socials small-caps" aria-label="작업물 더 보기">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램에서 작업물 보기 (새 창)">Instagram</a>
+    <a href="#work">시안 보기</a>
+    <a href="#top">맨 위로</a>
+  </nav>
+  <p class="copy">© 2026 뷰티샵 홈페이지 제작. 모든 시안의 사진은 예시 이미지예요.</p>
+</footer>
 
 <dialog class="pv" id="pv" aria-label="시안 미리보기">
   <div class="pv-top">
@@ -348,13 +536,163 @@ fieldset.field{border:0;min-width:0}
 </dialog>
 
 <script>
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// 워드마크: 글자를 하나씩 쪼개 화면 폭에 꽉 맞춘다
+const wordmark = document.getElementById('wordmark');
+wordmark.innerHTML = '<span class="wm-in">' + [...wordmark.textContent].map((c, i) => c === ' ' ? ' ' : `<span class="ch" style="--i:${i}">${c}</span>`).join('') + '</span>';
+const wmIn = wordmark.firstElementChild;
+function fitWordmark() {
+  const cs = getComputedStyle(wordmark);
+  const avail = wordmark.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  wordmark.style.fontSize = '100px';
+  wordmark.style.fontSize = `${Math.floor(100 * avail / wmIn.getBoundingClientRect().width * 10) / 10}px`;
+}
+document.fonts.ready.then(() => { fitWordmark(); document.body.classList.add('loaded'); });
+fitWordmark();
+window.addEventListener('resize', fitWordmark);
+
+// 모바일 전체 메뉴
+const mBtn = document.querySelector('.nav .m-btn');
+const setMenu = open => {
+  document.body.classList.toggle('menu-open', open);
+  mBtn.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+};
+mBtn.addEventListener('click', () => setMenu(true));
+document.querySelector('.m-close').addEventListener('click', () => setMenu(false));
+document.querySelectorAll('.m-menu nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false); });
+
+// 상단 메뉴: 지금 보고 있는 영역에 점 표시
+const navLinks = [...document.querySelectorAll('.nav a.nl')];
+const secIo = new IntersectionObserver(entries => entries.forEach(en => {
+  if (!en.isIntersecting) return;
+  const id = en.target.classList.contains('band') ? '#top' : `#${en.target.id}`;
+  navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+['about', 'work', 'consult'].forEach(id => secIo.observe(document.getElementById(id)));
+secIo.observe(document.querySelector('.band'));
+
+// 시안 정보표: 각 시안 CSS의 실제 색(:root 변수)과 글꼴 기준. 시안이 늘면 순서대로 한 줄 추가
+const SPECS = [
+  { style: '에디토리얼 럭셔리', note: '풀스크린 사진 슬라이드 · 썸네일 진행 바', colors: [['아이보리', '#F6F1EA'], ['샌드', '#E9DFD2'], ['세이지', '#7D8B74'], ['잉크', '#2B2824']], fonts: 'Cormorant Garamond · Noto Serif KR · 고운 돋움' },
+  { style: '매거진형 에디토리얼', note: '모자이크 사진 그리드 · 가로 스크롤 갤러리', colors: [['오프화이트', '#FAF8F6'], ['블러시', '#E8C8C0'], ['체리', '#8E2B36'], ['잉크', '#151413']], fonts: 'DM Serif Display · 고운 바탕 · Inter' },
+  { style: '경쾌한 컬러 팝', note: '회전 키워드 · 비포·애프터 드래그', colors: [['크림', '#FBF5EC'], ['코랄', '#FF6B4A'], ['버터', '#FFD66B'], ['민트', '#B9E3D0']], fonts: 'Bricolage Grotesque · 검은고딕 · 고운 돋움' },
+  { style: '대리석 럭셔리', note: '고민별 탭 · 방문 상담 예약 폼', colors: [['아이보리', '#FAF8F4'], ['마블', '#F1EDE6'], ['골드', '#A8834C'], ['잉크', '#2A2622']], fonts: '고운 바탕 · 고운 돋움' },
+  { style: '플루이드 유기적 · 파스텔', note: '눈매별 속눈썹 스타일 찾기', colors: [['플럼', '#2E2542'], ['퍼플', '#7B5CD6'], ['라일락', '#C7B5F2'], ['피치', '#FFC6B3']], fonts: '함렛 · 고운 돋움' },
+  { style: '다크 에디토리얼 매거진', note: '페이지 번호 풀스크린 배너 · 트렌드 룩북', colors: [['다크', '#141211'], ['아이보리', '#F3EEE7'], ['앰버', '#E3A55C']], fonts: '나눔명조 · 고운 돋움' },
+  { style: '키네틱 타이포 + 사진 중심', note: '흐르는 거대 글자 띠 · 원두 취향 찾기', colors: [['옐로', '#FFD471'], ['와인', '#5F0B2B'], ['코랄', '#F37780'], ['틸', '#237678']], fonts: '도현 · Big Shoulders Display · 고운 돋움' },
+  { style: '리퀴드 글래스 + 사진 벤토', note: '유리 예약 바 · 객실 사진 갤러리', colors: [['틸', '#297674'], ['아쿠아', '#C7F5FB'], ['피치', '#E19E86'], ['네이비', '#393650']], fonts: 'IBM Plex Sans KR · 고운 돋움' },
+  { style: '다크 스위스 그리드', note: '커서를 따라오는 사진 · 단계형 체험 신청', colors: [['차콜', '#23272A'], ['오프화이트', '#F0EEE5'], ['코랄', '#E4674E']], fonts: 'Gothic A1 · 고운 돋움' }
+];
+document.querySelectorAll('.list .tpl').forEach((tpl, i) => {
+  const s = SPECS[i];
+  if (!s) return;
+  const sw = s.colors.map(([name, hex]) => `<span class="sw"><i style="--c:${hex}" aria-hidden="true"></i>${name} <code>${hex}</code></span>`).join('');
+  tpl.insertAdjacentHTML('beforeend', `<dl class="spec"><div><dt class="small-caps">Style</dt><dd>${s.style}<small>${s.note}</small></dd></div><div><dt class="small-caps">Color</dt><dd class="sw-list">${sw}</dd></div><div><dt class="small-caps">Type</dt><dd>${s.fonts}</dd></div></dl>`);
+});
+
+// 스크롤 등장 (마스크 줄, 카드, 문단)
+document.querySelectorAll('.list .tpl').forEach((t, i) => t.style.setProperty('--d', `${(i % 2) * 0.12}s`));
+const io = new IntersectionObserver(entries => entries.forEach(en => {
+  if (!en.isIntersecting) return;
+  en.target.classList.add('in');
+  io.unobserve(en.target);
+}), { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv, .mask, .tpl').forEach(el => io.observe(el));
+
+// 팝 퍼레이드: 흩어진 카드가 왼쪽으로 행진하고, 오른쪽에서 팝 하며 등장 → 왼쪽 끝에서 쏙 사라짐
+const track = document.getElementById('track');
+const stage = track.parentElement;
+const cells = [...track.children];
+// 카드별 크기(무대 높이 대비), 가로세로 비율, 세로 위치(0 위 ~ 1 아래)
+const LAYOUT = [
+  { k: .46, ar: 1.3, y: .08 }, { k: .6, ar: .8, y: .62 }, { k: .4, ar: 1.45, y: .02 },
+  { k: .36, ar: 1, y: .95 }, { k: .58, ar: .78, y: .3 }, { k: .44, ar: 1.2, y: .9 },
+  { k: .5, ar: 1.35, y: .12 }, { k: .4, ar: .86, y: .7 }, { k: .46, ar: 1.1, y: .35 }
+];
+const backOut = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const backIn = t => { const c = 1.7; return (c + 1) * t * t * t - c * t * t; };
+let W = 0, H = 0, L = 0, offset = 0, speed = 0, target = 0, started = false, last = performance.now();
+const state = cells.map(() => ({ base: 0, w: 0, h: 0, top: 0, mode: 'hidden', t0: 0, s: 0 }));
+
+function layoutParade() {
+  W = stage.clientWidth; H = stage.clientHeight;
+  const sf = W < 768 ? 0.74 : 1; // 모바일은 카드를 작게, 더 촘촘하게
+  let acc = 0;
+  cells.forEach((c, i) => {
+    const g = LAYOUT[i % LAYOUT.length], st = state[i];
+    st.h = H * g.k * sf; st.w = st.h * g.ar;
+    st.top = g.y * (H - st.h);
+    st.base = acc;
+    acc += st.w * (W < 768 ? 0.6 : 0.7) + 14; // 앞 카드와 30~40% 겹치게
+    c.style.width = `${st.w}px`; c.style.height = `${st.h}px`;
+    c.style.zIndex = String(i % 2 ? 2 : 1);
+  });
+  L = Math.max(acc, W + 600);
+}
+
+function parade(t) {
+  const dt = Math.min(t - last, 50); last = t;
+  speed += (target - speed) * 0.05;
+  offset += speed * dt / 1000 * Math.max(W * 0.05, 45); // 화면 폭 기준 속도 (모바일 최소 45px/초)
+  cells.forEach((c, i) => {
+    const st = state[i];
+    const x = ((st.base - offset) % L + L) % L - st.w * 0.6;
+    // 오른쪽에서 화면 안으로 들어오면 팝 등장, 왼쪽 끝에 닿으면 팝 퇴장
+    if (st.mode === 'hidden' && started && x < W - st.w * 0.55 && x > W * 0.35) { st.mode = 'in'; st.t0 = t; }
+    if (st.mode !== 'hidden' && st.mode !== 'out' && x < -st.w * 0.05) { st.mode = 'out'; st.t0 = t; }
+    if (st.mode === 'in') { const p = Math.max(0, Math.min((t - st.t0) / 650, 1)); st.s = backOut(p); if (p >= 1) st.mode = 'shown'; }
+    else if (st.mode === 'out') { const p = Math.min((t - st.t0) / 380, 1); st.s = 1 - backIn(p); if (p >= 1) { st.mode = 'hidden'; st.s = 0; } }
+    c.style.transform = `translate3d(${x}px,${st.top}px,0) scale(${Math.max(st.s, 0)})`;
+    c.style.pointerEvents = st.s > 0.5 ? '' : 'none';
+    c.tabIndex = st.s > 0.5 ? 0 : -1;
+  });
+  requestAnimationFrame(parade);
+}
+
+layoutParade();
+window.addEventListener('resize', layoutParade);
+if (reduceMotion) {
+  // 움직임 줄이기: 흩어진 배치로 멈춰 두고 화면 안 카드만 보여 준다
+  cells.forEach((c, i) => {
+    const st = state[i], x = st.base - st.w * 0.6;
+    c.style.transform = `translate3d(${x}px,${st.top}px,0) scale(${x < W ? 1 : 0})`;
+  });
+} else {
+  // 무대가 보이면 화면 안 카드부터 순서대로 팝 하며 행진 시작
+  const startIo = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    startIo.disconnect();
+    const now = performance.now();
+    let n = 0;
+    cells.forEach((c, i) => {
+      const st = state[i], x = st.base - st.w * 0.6;
+      if (x < W - st.w * 0.3) { st.mode = 'in'; st.t0 = now + n++ * 130; }
+    });
+    started = true; target = 1;
+  }, { threshold: 0.25 });
+  startIo.observe(stage);
+  requestAnimationFrame(parade);
+}
+// 마우스를 올리면 행진이 느려진다
+track.addEventListener('pointerenter', () => { target = 0.15; });
+track.addEventListener('pointerleave', () => { target = 1; });
+
 // 업종 필터: 버튼을 누르면 해당 업종 시안만 보여 준다
 const filterBtns = document.querySelectorAll('.filter button');
 const tpls = document.querySelectorAll('.tpl');
+const countEl = document.querySelector('.section-head h2 span');
 filterBtns.forEach(btn => btn.addEventListener('click', () => {
   const f = btn.dataset.f;
   filterBtns.forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
-  tpls.forEach(t => { t.hidden = f !== 'all' && t.dataset.cat !== f; });
+  let n = 0;
+  tpls.forEach(t => {
+    t.hidden = f !== 'all' && t.dataset.cat !== f;
+    if (!t.hidden) { n++; t.classList.remove('in'); void t.offsetWidth; t.classList.add('in'); }
+  });
+  countEl.textContent = `(${n})`;
 }));
 
 // 미리보기 창: 시안을 iframe으로 띄우고 데스크탑(1280px) / 모바일(390px) 폭으로 전환한다
@@ -420,7 +758,7 @@ function openPreview(href, tpl) {
 }
 
 tpls.forEach(tpl => {
-  tpl.querySelectorAll('a.cover, .over a.btn:not([target]), h2 a').forEach(a => a.addEventListener('click', e => {
+  tpl.querySelectorAll('a.cover, h2 a').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
     openPreview(a.getAttribute('href'), tpl);
   }));
@@ -440,14 +778,19 @@ let pvIndex = 0;
 cDate.min = new Date().toISOString().slice(0, 10);
 
 // 미리보기에서 "이 시안으로 상담 신청"을 누르면 해당 시안을 체크하고 신청서로 이동
-tplOrder.forEach((tpl, i) => tpl.querySelectorAll('a.cover, .over a.btn:not([target]), h2 a').forEach(a => a.addEventListener('click', () => { pvIndex = i; })));
+tplOrder.forEach((tpl, i) => tpl.querySelectorAll('a.cover, h2 a').forEach(a => a.addEventListener('click', () => { pvIndex = i; })));
+// 콜라주 사진을 누르면 같은 시안의 미리보기를 연다
+track.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', () => {
+  const i = Number(cell.dataset.i);
+  pvIndex = i;
+  openPreview(tplOrder[i].querySelector('a.cover').getAttribute('href'), tplOrder[i]);
+}));
 pv.querySelector('.pv-ask').addEventListener('click', () => {
   const box = cForm.querySelectorAll('input[name="관심 시안"]')[pvIndex];
   if (box) box.checked = true;
   pv.close();
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.getElementById('consult').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-  setTimeout(() => cForm.querySelector('input[name="성함"]').focus({ preventScroll: true }), reduce ? 0 : 600);
+  document.getElementById('consult').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  setTimeout(() => cForm.querySelector('input[name="성함"]').focus({ preventScroll: true }), reduceMotion ? 0 : 600);
 });
 
 const showMsg = (text, type) => { cMsg.textContent = text; cMsg.className = 'c-msg full ' + type; };
