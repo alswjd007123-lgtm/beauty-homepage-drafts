@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>물결채 MULGYEOLCHAE</title>
+<meta name="description" content="파도 소리로 아침을 여는 바닷가 독채 스테이, 물결채. 객실 안내, 부대시설, 요금, 주변 즐길거리와 예약 방법을 안내합니다.">
+<meta property="og:title" content="물결채 | 파도 소리로 아침을 여는 독채">
+<meta property="og:description" content="두 채뿐인 바닷가 독채 스테이">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80">
+<!-- 네이버·구글 웹마스터 인증 메타태그 자리
+<meta name="naver-site-verification" content="발급받은코드">
+<meta name="google-site-verification" content="발급받은코드">
+-->
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@300;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<!-- 네이버 애널리틱스·구글 애널리틱스 추적 스크립트 자리 -->
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><path id="ringPath" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs></svg>
+
+<header class="header" id="header">
+  <div class="header-in lg">
+    <a href="#top" class="logo" aria-label="물결채 처음으로"><svg viewBox="0 0 40 20" aria-hidden="true"><path d="M2 12c4-6 8-6 12 0s8 6 12 0 8-6 12 0"/></svg>물결채</a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="#rooms">객실</a>
+      <a href="#facility">머무는 즐거움</a>
+      <a href="#price">요금</a>
+      <a href="#around">주변 여행</a>
+      <a href="#visit">오시는 길</a>
+    </nav>
+    <a href="#reserve" class="btn btn-peach header-cta">예약 문의</a>
+    <button class="menu-btn" aria-label="전체 메뉴 열기" aria-expanded="false" aria-controls="mNav"><span></span><span></span></button>
+  </div>
+</header>
+<div class="m-dim" aria-hidden="true"></div>
+<nav class="m-nav lg" id="mNav" aria-label="모바일 메뉴">
+  <a href="#rooms">객실</a>
+  <a href="#facility">머무는 즐거움</a>
+  <a href="#price">요금</a>
+  <a href="#around">주변 여행</a>
+  <a href="#faq">자주 묻는 질문</a>
+  <a href="#visit">오시는 길</a>
+  <a href="#reserve" class="btn btn-peach">예약 문의</a>
+</nav>
+
+<main id="top">
+  <!-- 히어로: 사진 슬라이드 + 리퀴드 글래스 예약 바 -->
+  <section class="hero" aria-label="대표 이미지">
+    <div class="hs">
+      <div class="hs-slide on">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80" alt="노을이 지는 해변과 잔잔한 파도">
+        <div class="hs-txt wrap">
+          <p class="eyebrow">OCEANFRONT PRIVATE STAY</p>
+          <h1 class="hs-title">파도 소리로<br>아침을 여는 집</h1>
+        </div>
+      </div>
+      <div class="hs-slide">
+        <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=2000&q=80" alt="바다를 마주한 나무 데크와 수영장" loading="lazy">
+        <div class="hs-txt wrap">
+          <p class="eyebrow">ONLY TWO HOUSES</p>
+          <p class="hs-title">하루 두 팀,<br>바다는 한 장 통째로</p>
+        </div>
+      </div>
+      <div class="hs-slide">
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=80" alt="창밖으로 바다가 보이는 침실" loading="lazy">
+        <div class="hs-txt wrap">
+          <p class="eyebrow">WAKE UP WITH THE SEA</p>
+          <p class="hs-title">누운 채로<br>해 뜨는 걸 봐요</p>
+        </div>
+      </div>
+    </div>
+    <div class="hs-ctrl wrap">
+      <p class="hs-count"><b id="hsNo">01</b> / 03</p>
+      <div class="hs-bar"><span id="hsBar"></span></div>
+      <button class="hs-btn" id="hsPrev" aria-label="이전 사진">←</button>
+      <button class="hs-btn" id="hsPause" aria-label="자동 넘김 멈춤">❚❚</button>
+      <button class="hs-btn" id="hsNext" aria-label="다음 사진">→</button>
+    </div>
+  </section>
+
+  <!-- 예약 바 (히어로에 겹침) -->
+  <div class="wrap book-wrap">
+    <form class="book-bar lg spot rv" action="#reserve" aria-label="예약 가능 날짜 문의">
+      <label class="field"><span>체크인</span><input type="date" name="checkin" required></label>
+      <label class="field"><span>체크아웃</span><input type="date" name="checkout" required></label>
+      <label class="field"><span>인원</span>
+        <select name="guests"><option>2명</option><option>3명</option><option>4명</option></select>
+      </label>
+      <button type="submit" class="btn btn-teal">빈 날짜 문의</button>
+    </form>
+    <p class="book-note" id="bookNote" aria-live="polite"></p>
+  </div>
+
+  <!-- 편의 아이콘 줄 (닷홈빌더 Our Service 패턴) -->
+  <section class="service wrap" aria-label="편의 서비스">
+    <ul class="svc-row">
+      <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>무료 와이파이</li>
+      <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/></svg>호텔식 침구</li>
+      <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16M6 11l2 9M18 11l-2 9M8 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4"/></svg>개별 바비큐</li>
+      <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="9" rx="2"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/></svg>독채 앞 주차</li>
+      <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-2 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>아침 바구니</li>
+    </ul>
+  </section>
+
+  <!-- 소개: 마스크 사진 + 숫자 -->
+  <section class="section intro">
+    <div class="wrap intro-in">
+      <div class="intro-txt">
+        <p class="eyebrow rv">ABOUT</p>
+        <p class="intro-text rv">하루에 두 팀만 머물러요.<br>옆집 소리 대신 <em>파도 소리</em>가 들리도록,<br>두 채 사이를 넉넉히 띄웠습니다.</p>
+        <ul class="facts">
+          <li class="lg rv"><b><span data-count="2">0</span>채</b><span>독채만 운영</span></li>
+          <li class="lg rv"><b><span data-count="1">0</span>분</b><span>마당에서 해변까지</span></li>
+          <li class="lg rv"><b><span data-count="80">0</span>m</b><span>두 채 사이 거리</span></li>
+        </ul>
+      </div>
+      <div class="intro-imgs">
+        <figure class="mask i1"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="수영장이 있는 하얀 독채 외관" loading="lazy"></figure>
+        <figure class="mask i2"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=700&q=80" alt="가까이서 본 파도" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 객실: 세그먼트 탭 + 사진 갤러리 -->
+  <section class="section rooms" id="rooms">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow rv">ROOMS</p>
+        <h2 class="sec-title rv">두 채, 두 가지 바다</h2>
+      </div>
+      <div class="seg lg rv" role="tablist" aria-label="객실 선택">
+        <button role="tab" id="r-sea" aria-controls="room-sea" aria-selected="true">바다채</button>
+        <button role="tab" id="r-pine" aria-controls="room-pine" aria-selected="false" tabindex="-1">솔채</button>
+        <span class="seg-pill" aria-hidden="true"></span>
+      </div>
+
+      <article class="room" id="room-sea" role="tabpanel" aria-labelledby="r-sea">
+        <div class="gallery">
+          <div class="g-main zoom"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80" alt="바다채 침실" loading="lazy"></div>
+          <div class="g-thumbs">
+            <button class="on" data-src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80" data-alt="바다채 침실" aria-label="침실 사진 보기"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+            <button data-src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1400&q=80" data-alt="바다채 원목 침실" aria-label="원목 침실 사진 보기"><img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+            <button data-src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1400&q=80" data-alt="바다채 거실" aria-label="거실 사진 보기"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+            <button data-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80" data-alt="바다채 자쿠지와 데크" aria-label="자쿠지 사진 보기"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="room-info lg">
+          <h3>바다채</h3>
+          <p>통창 너머로 수평선이 한 줄로 보이는 객실이에요. 침대에 누운 채로 해 뜨는 걸 볼 수 있어요.</p>
+          <ul class="specs">
+            <li><span>인원</span>기준 2명 · 최대 4명</li>
+            <li><span>구성</span>침실 1 · 거실 겸 주방 · 욕실 1</li>
+            <li><span>특징</span>오션뷰 자쿠지, 마당 바비큐</li>
+          </ul>
+          <div class="room-btns">
+            <a href="#reserve" class="btn btn-teal">예약 신청</a>
+            <a href="#reserve" class="btn btn-glass">간편 상담</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" id="room-pine" role="tabpanel" aria-labelledby="r-pine" hidden>
+        <div class="gallery">
+          <div class="g-main zoom"><img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1400&q=80" alt="솔채 침실" loading="lazy"></div>
+          <div class="g-thumbs">
+            <button class="on" data-src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1400&q=80" data-alt="솔채 침실" aria-label="침실 사진 보기"><img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+            <button data-src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=80" data-alt="솔채 거실" aria-label="거실 사진 보기"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+            <button data-src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1400&q=80" data-alt="솔채 앞 소나무 숲" aria-label="소나무 숲 사진 보기"><img src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+            <button data-src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1400&q=80" data-alt="솔채 다락 침실" aria-label="다락 사진 보기"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=300&q=60" alt="" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="room-info lg">
+          <h3>솔채</h3>
+          <p>소나무 숲 쪽으로 창을 낸 조용한 객실이에요. 다락방이 있어 아이와 함께 오기 좋아요.</p>
+          <ul class="specs">
+            <li><span>인원</span>기준 2명 · 최대 4명</li>
+            <li><span>구성</span>침실 1 · 다락 · 거실 겸 주방 · 욕실 1</li>
+            <li><span>특징</span>숲 뷰 노천탕, 불멍 화로</li>
+          </ul>
+          <div class="room-btns">
+            <a href="#reserve" class="btn btn-teal">예약 신청</a>
+            <a href="#reserve" class="btn btn-glass">간편 상담</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 부대시설: 사진 벤토 -->
+  <section class="section facility" id="facility">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow rv">STAY &amp; PLAY</p>
+        <h2 class="sec-title rv">머무는 동안의 즐거움</h2>
+      </div>
+      <div class="bento">
+        <article class="tile t-big zoom rv"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80" alt="나무 데크 옆 자쿠지" loading="lazy"><div class="tile-cap lg"><h3>바다를 보며 자쿠지</h3><p>해 질 무렵 물을 받아 두면, 노을이 욕조 안까지 들어와요.</p></div></article>
+        <article class="tile zoom rv"><img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=800&q=80" alt="저녁 마당 바비큐" loading="lazy"><div class="tile-cap lg"><h3>마당 바비큐</h3><p>그릴과 숯 준비 (2만 원)</p></div></article>
+        <article class="tile zoom rv"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="별이 쏟아지는 밤하늘" loading="lazy"><div class="tile-cap lg"><h3>불멍과 별 보기</h3><p>장작 한 묶음 기본 제공</p></div></article>
+        <article class="tile zoom rv"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80" alt="주방에서 요리하는 두 사람" loading="lazy"><div class="tile-cap lg"><h3>요리하는 주방</h3><p>인덕션·오븐·식기 완비</p></div></article>
+        <article class="tile t-wide zoom rv"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="저녁 조명이 켜진 독채 외관" loading="lazy"><div class="tile-cap lg"><h3>독채 앞 전용 주차</h3><p>객실마다 한 대씩 바로 앞에 세워요. 짐 옮기기 편해요.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 띠 배너 CTA -->
+  <section class="band" aria-label="예약 안내">
+    <img data-parallax="0.15" src="https://images.unsplash.com/photo-1439405326854-014607f694d7?auto=format&fit=crop&w=2000&q=80" alt="" loading="lazy">
+    <div class="wrap band-in">
+      <h2 class="rv">이번 주말,<br>바다 앞이 비어 있을까요?</h2>
+      <div class="band-btns rv">
+        <a href="#reserve" class="btn btn-peach">빈 날짜 문의</a>
+        <a href="#price" class="btn btn-glass">요금 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 요금표 -->
+  <section class="section price" id="price">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow rv">RATES</p>
+        <h2 class="sec-title rv">요금 안내</h2>
+        <p class="sec-desc rv">1박 기준이에요. 성수기는 7월 15일부터 8월 20일까지예요.</p>
+      </div>
+      <div class="rate lg rv" role="table" aria-label="객실 요금표">
+        <div class="rate-row head" role="row">
+          <span role="columnheader">객실</span><span role="columnheader">비수기 주중</span><span role="columnheader">비수기 주말</span><span role="columnheader">성수기</span>
+        </div>
+        <div class="rate-row" role="row">
+          <span role="rowheader">바다채</span>
+          <span role="cell" data-label="비수기 주중">220,000원</span>
+          <span role="cell" data-label="비수기 주말">280,000원</span>
+          <span role="cell" data-label="성수기">350,000원</span>
+        </div>
+        <div class="rate-row" role="row">
+          <span role="rowheader">솔채</span>
+          <span role="cell" data-label="비수기 주중">190,000원</span>
+          <span role="cell" data-label="비수기 주말">250,000원</span>
+          <span role="cell" data-label="성수기">320,000원</span>
+        </div>
+      </div>
+      <p class="rate-note rv">기준 인원 초과 시 1명당 20,000원 · 36개월 미만 무료</p>
+    </div>
+  </section>
+
+  <!-- 주변 여행 (닷홈빌더 Near Spot 패턴) -->
+  <section class="section around" id="around">
+    <div class="wrap sec-head">
+      <p class="eyebrow rv">NEAR SPOT</p>
+      <h2 class="sec-title rv">걸어서, 혹은 잠깐 차로</h2>
+    </div>
+    <div class="around-track" tabindex="0" aria-label="주변 즐길거리, 옆으로 넘겨 보기">
+      <article class="spot-card rv"><div class="zoom sc-img"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=700&q=80" alt="야자수가 있는 해변" loading="lazy"></div><span class="km">도보 1분</span><h3>앞바다 해변</h3><p>아침 물때에 맞춰 걸으면 조개껍데기가 많아요.</p></article>
+      <article class="spot-card rv"><div class="zoom sc-img"><img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=700&q=80" alt="위에서 본 파도와 숲" loading="lazy"></div><span class="km">차로 10분</span><h3>스노클링 포인트</h3><p>물이 맑은 여름에 특히 좋아요.</p></article>
+      <article class="spot-card rv"><div class="zoom sc-img"><img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=700&q=80" alt="노을 지는 해변" loading="lazy"></div><span class="km">차로 15분</span><h3>노을 전망대</h3><p>해 질 무렵 가장 붐비는 곳이에요.</p></article>
+      <article class="spot-card rv"><div class="zoom sc-img"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=700&q=80" alt="호수 위 나무 보트" loading="lazy"></div><span class="km">차로 20분</span><h3>호수 보트 투어</h3><p>바다가 거친 날 대신 가기 좋아요.</p></article>
+    </div>
+  </section>
+
+  <!-- 흐르는 사진 띠 -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="wrap faq-in">
+      <div class="sec-head">
+        <p class="eyebrow rv">FAQ</p>
+        <h2 class="sec-title rv">자주 묻는 질문</h2>
+        <p class="sec-desc rv">답을 못 찾으셨다면 카톡으로 편하게 물어봐 주세요.</p>
+      </div>
+      <div class="faq-list">
+        <details class="lg rv"><summary>반려견과 함께 갈 수 있나요?</summary><p>솔채만 10kg 이하 소형견 1마리까지 함께할 수 있어요. 미리 알려 주세요.</p></details>
+        <details class="lg rv"><summary>바비큐는 몇 시까지 할 수 있나요?</summary><p>이웃 객실을 위해 밤 10시까지 이용해 주세요.</p></details>
+        <details class="lg rv"><summary>체크인 전에 짐을 맡길 수 있나요?</summary><p>미리 연락 주시면 가능 여부를 알려 드려요.</p></details>
+        <details class="lg rv"><summary>취소하면 환불은 어떻게 되나요?</summary><p>이용일 7일 전까지 전액, 3일 전까지 50%를 돌려드려요. 아래 예약 안내를 함께 확인해 주세요.</p></details>
+        <details class="lg rv"><summary>아이 침구를 따로 받을 수 있나요?</summary><p>솔채 다락에 추가 침구가 있어요. 바다채는 미리 말씀해 주세요.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 예약 안내 -->
+  <section class="section reserve" id="reserve">
+    <img data-parallax="0.1" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=2000&q=80" alt="" loading="lazy">
+    <div class="wrap">
+      <div class="reserve-card lg spot rv">
+        <div>
+          <p class="eyebrow">RESERVATION</p>
+          <h2 class="sec-title">예약은 이렇게 해요</h2>
+          <ol class="flow">
+            <li><b>1</b>빈 날짜를 확인해요 (네이버 예약 또는 카톡)</li>
+            <li><b>2</b>안내받은 계좌로 입금하면 확정돼요</li>
+            <li><b>3</b>이용 하루 전, 오시는 길과 비밀번호를 보내 드려요</li>
+          </ol>
+          <p class="policy">체크인 15:00 · 체크아웃 11:00 · 7일 전 취소 전액 환불, 3일 전 50%</p>
+        </div>
+        <div class="reserve-btns">
+          <a href="#reserve" class="btn btn-peach" aria-label="네이버 예약으로 이동 (실제 링크로 교체)">네이버 예약</a>
+          <a href="#reserve" class="btn btn-glass" aria-label="카카오톡 채널로 문의 (실제 링크로 교체)">카톡 문의</a>
+          <a href="tel:010-0000-0000" class="btn btn-glass">전화 010-0000-0000</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 오시는 길 -->
+  <section class="section visit" id="visit">
+    <div class="wrap visit-in">
+      <figure class="visit-photo mask"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80" alt="바닷가에 선 숙소 전경" loading="lazy"></figure>
+      <div class="visit-card lg rv">
+        <p class="eyebrow">LOCATION</p>
+        <h2 class="sec-title">오시는 길</h2>
+        <p class="addr">강원 양양군 현남면 해안길 00</p>
+        <ul class="ways">
+          <li><span>자가용</span>서울양양고속도로 양양IC에서 20분</li>
+          <li><span>대중교통</span>양양터미널에서 택시 15분 · 픽업 가능(사전 문의)</li>
+        </ul>
+        <div class="visit-btns">
+          <a href="#visit" class="btn btn-teal" aria-label="네이버 지도로 길찾기 (실제 링크로 교체)">네이버 지도</a>
+          <a href="#visit" class="btn btn-glass" aria-label="카카오맵으로 길찾기 (실제 링크로 교체)">카카오맵</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="f-logo">물결채</p>
+    <p>상호 물결채 · 대표 박물결 · 사업자등록번호 000-00-00000 · 농어촌민박 신고번호 제0000-00호<br>강원 양양군 현남면 해안길 00 · 010-0000-0000</p>
+    <p class="muted">© <span id="year"></span> 물결채. 이 페이지는 홈페이지 시안이며 상호, 요금, 주소, 연락처는 모두 예시예요. 사진: Unsplash</p>
+  </div>
+</footer>
+
+<div class="float" aria-label="빠른 연결">
+  <a href="tel:010-0000-0000" aria-label="전화 걸기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
+  <a href="#reserve" aria-label="카카오톡 문의"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></a>
+  <a href="#visit" aria-label="오시는 길"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></a>
+  <button type="button" id="toTop" aria-label="맨 위로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z"/></svg></button>
+</div>
+
+<nav class="bottom-bar lg" aria-label="빠른 연결">
+  <a href="tel:010-0000-0000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>전화</a>
+  <a href="#reserve"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>카톡</a>
+  <a href="#reserve" class="main">예약 문의</a>
+</nav>
+
+<script src="js/main.js"></script>
+</body>
+</html>

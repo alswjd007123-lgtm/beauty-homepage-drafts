@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윤슬 로스터스 YUNSEUL ROASTERS</title>
+<meta name="description" content="작게 볶아 빠르게 내리는 스페셜티 로스터리 카페, 윤슬 로스터스. 이번 주 원두와 메뉴, 원두 취향 찾기, 오시는 길을 안내합니다.">
+<meta property="og:title" content="윤슬 로스터스 | 물결에 비친 빛처럼, 한 잔">
+<meta property="og:description" content="이번 주 볶은 원두와 나에게 맞는 원두 찾기">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80">
+<!-- 네이버·구글 웹마스터 인증 메타태그 자리
+<meta name="naver-site-verification" content="발급받은코드">
+<meta name="google-site-verification" content="발급받은코드">
+-->
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Do+Hyeon&family=Big+Shoulders+Display:wght@800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<!-- 네이버 애널리틱스·구글 애널리틱스 추적 스크립트 자리 -->
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<!-- 회전 링 글자 경로 (카드 호버용) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><path id="ringPath" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs></svg>
+
+<header class="header" id="header">
+  <div class="header-in">
+    <a href="#top" class="logo" aria-label="윤슬 로스터스 처음으로">YUNSEUL<span>윤슬 로스터스</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="#about">로스터리</a>
+      <a href="#beans">이번 주 원두</a>
+      <a href="#menu">메뉴</a>
+      <a href="#space">공간</a>
+      <a href="#visit">오시는 길</a>
+    </nav>
+    <a href="#subscribe" class="btn btn-yellow header-cta">정기배송 문의</a>
+    <button class="menu-btn" aria-label="전체 메뉴 열기" aria-expanded="false" aria-controls="mNav"><span></span><span></span></button>
+  </div>
+</header>
+<div class="m-dim" aria-hidden="true"></div>
+<nav class="m-nav" id="mNav" aria-label="모바일 메뉴">
+  <a href="#about">로스터리</a>
+  <a href="#beans">이번 주 원두</a>
+  <a href="#finder">취향 찾기</a>
+  <a href="#menu">메뉴</a>
+  <a href="#space">공간</a>
+  <a href="#visit">오시는 길</a>
+  <a href="#subscribe" class="btn btn-wine">정기배송 문의</a>
+</nav>
+
+<main id="top">
+  <!-- 히어로: 풀스크린 사진 슬라이드 + 진행 바 -->
+  <section class="hero" aria-label="대표 이미지">
+    <div class="hs">
+      <div class="hs-slide on">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=2000&q=80" alt="핸드드립 바에서 커피를 내리는 모습">
+        <div class="hs-txt wrap">
+          <p class="eyebrow">SMALL BATCH ROASTERY &amp; CAFE</p>
+          <h1 class="hs-title">물결에 비친<br>빛처럼, 한 잔.</h1>
+          <p class="hs-sub">매주 조금씩 볶아, 가장 맛있는 날에 내립니다.</p>
+        </div>
+      </div>
+      <div class="hs-slide">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=2000&q=80" alt="포터필터에 담긴 갓 갈아낸 원두" loading="lazy">
+        <div class="hs-txt wrap">
+          <p class="eyebrow">FRESH ROAST, EVERY TUESDAY &amp; FRIDAY</p>
+          <p class="hs-title">화요일과 금요일,<br>로스터가 켜지는 날.</p>
+          <p class="hs-sub">볶은 지 일주일 안의 원두만 내려요.</p>
+        </div>
+      </div>
+      <div class="hs-slide">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=2000&q=80" alt="나무 테이블이 길게 놓인 카페 내부" loading="lazy">
+        <div class="hs-txt wrap">
+          <p class="eyebrow">STAY A WHILE</p>
+          <p class="hs-title">큰 테이블에 앉아<br>천천히 머물다 가세요.</p>
+          <p class="hs-sub">창가 바 좌석부터 여럿이 앉는 테이블까지.</p>
+        </div>
+      </div>
+    </div>
+    <div class="hs-ctrl wrap">
+      <p class="hs-count"><b id="hsNo">01</b> / 03</p>
+      <div class="hs-bar"><span id="hsBar"></span></div>
+      <button class="hs-btn" id="hsPrev" aria-label="이전 사진">←</button>
+      <button class="hs-btn" id="hsPause" aria-label="자동 넘김 멈춤">❚❚</button>
+      <button class="hs-btn" id="hsNext" aria-label="다음 사진">→</button>
+    </div>
+    <p class="scroll-cue" aria-hidden="true">SCROLL</p>
+  </section>
+
+  <!-- 히어로 아래 퀵링크 카드 (닷홈빌더 패턴) -->
+  <nav class="quick wrap" aria-label="바로가기">
+    <a href="#beans" class="q-card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="6" ry="9" transform="rotate(-25 12 12)"/><path d="M9 5c3 3 3 9 6 14" fill="none"/></svg><b>이번 주 원두</b><span>4종 보기</span></a>
+    <a href="#finder" class="q-card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="none"/><path d="M16 16l4 4" fill="none"/></svg><b>취향 찾기</b><span>두 번만 고르기</span></a>
+    <a href="#menu" class="q-card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h12v5a6 6 0 0 1-12 0z" fill="none"/><path d="M17 10h2a2 2 0 0 1 0 4h-2" fill="none"/></svg><b>메뉴판</b><span>커피·디저트</span></a>
+    <a href="#visit" class="q-card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z" fill="none"/><circle cx="12" cy="9" r="2.5" fill="none"/></svg><b>오시는 길</b><span>영업시간 확인</span></a>
+  </nav>
+
+  <!-- 키네틱 글자 띠 -->
+  <div class="kinetic" aria-hidden="true">
+    <div class="kinetic-row" data-speed="0.35"><span>YUNSEUL ROASTERS ✺ SMALL BATCH ✺ YUNSEUL ROASTERS ✺ SMALL BATCH ✺&nbsp;</span><span>YUNSEUL ROASTERS ✺ SMALL BATCH ✺ YUNSEUL ROASTERS ✺ SMALL BATCH ✺&nbsp;</span></div>
+    <div class="kinetic-row outline" data-speed="-0.25"><span>FRESH ROAST ✺ SLOW BREW ✺ FRESH ROAST ✺ SLOW BREW ✺&nbsp;</span><span>FRESH ROAST ✺ SLOW BREW ✺ FRESH ROAST ✺ SLOW BREW ✺&nbsp;</span></div>
+  </div>
+
+  <!-- 로스터리 소개 -->
+  <section class="section about" id="about">
+    <div class="wrap about-in">
+      <div class="about-imgs">
+        <figure class="mask a1"><img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=900&q=80" alt="나무 도마 위에 놓인 원두와 라떼" loading="lazy"></figure>
+        <figure class="mask a2"><img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=700&q=80" alt="커피 기구가 정리된 바 선반" loading="lazy"></figure>
+        <span class="about-badge" aria-hidden="true">SINCE<br>ROAST</span>
+      </div>
+      <div class="about-txt">
+        <p class="eyebrow rv">OUR ROASTERY</p>
+        <h2 class="sec-title rv">많이 볶지 않아서,<br>매주 새로워요.</h2>
+        <p class="rv">윤슬 로스터스는 한 번에 적은 양만 볶는 작은 로스터리예요. 그래서 이번 주에 마신 원두가 다음 주에는 없을 수도 있어요. 대신 언제 와도 볶은 지 일주일이 안 된 커피를 드릴 수 있어요.</p>
+        <ul class="stats rv">
+          <li><b><span data-count="4">0</span>종</b><span>이번 주 원두</span></li>
+          <li><b>주 <span data-count="2">0</span>회</b><span>로스팅</span></li>
+          <li><b><span data-count="7">0</span>일</b><span>안에 내린 원두만</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이번 주 원두: 사진 카드 가로 스크롤 -->
+  <section class="section beans" id="beans">
+    <div class="wrap sec-head">
+      <p class="eyebrow rv">THIS WEEK</p>
+      <h2 class="sec-title rv">이번 주 볶은 원두</h2>
+      <p class="sec-desc rv">옆으로 넘겨 보세요. 맛 표현은 로스터가 직접 마셔 보고 적었어요.</p>
+    </div>
+    <div class="bean-track" tabindex="0" aria-label="원두 목록, 옆으로 넘겨 보기">
+      <article class="bean-card rv">
+        <a href="#subscribe" class="bean-img zoom" aria-label="예가체프 꽃잎 주문 문의"><img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80" alt="원두 봉투" loading="lazy"><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">주문 문의 · ORDER · 주문 문의 · ORDER ·</textPath></text></svg></span></a>
+        <p class="bean-origin">에티오피아 · 워시드</p>
+        <h3>예가체프 꽃잎</h3>
+        <ul class="chips"><li>자스민</li><li>레몬</li><li>홍차</li></ul>
+        <div class="bean-meter" aria-label="산미 5단계 중 5"><span>산미</span><i style="--v:5"></i></div>
+        <p class="price">200g <b>19,000원</b></p>
+      </article>
+      <article class="bean-card rv">
+        <a href="#subscribe" class="bean-img zoom" aria-label="우일라 캐러멜 주문 문의"><img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=700&q=80" alt="원두 봉투와 그라인더" loading="lazy"><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">주문 문의 · ORDER · 주문 문의 · ORDER ·</textPath></text></svg></span></a>
+        <p class="bean-origin">콜롬비아 · 허니</p>
+        <h3>우일라 캐러멜</h3>
+        <ul class="chips"><li>캐러멜</li><li>사과</li><li>밀크초콜릿</li></ul>
+        <div class="bean-meter" aria-label="산미 5단계 중 3"><span>산미</span><i style="--v:3"></i></div>
+        <p class="price">200g <b>17,000원</b></p>
+      </article>
+      <article class="bean-card rv">
+        <a href="#subscribe" class="bean-img zoom" aria-label="세하도 너트 주문 문의"><img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=700&q=80" alt="그릇에 담긴 원두" loading="lazy"><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">주문 문의 · ORDER · 주문 문의 · ORDER ·</textPath></text></svg></span></a>
+        <p class="bean-origin">브라질 · 내추럴</p>
+        <h3>세하도 너트</h3>
+        <ul class="chips"><li>땅콩</li><li>다크초콜릿</li><li>흑설탕</li></ul>
+        <div class="bean-meter" aria-label="산미 5단계 중 1"><span>산미</span><i style="--v:1"></i></div>
+        <p class="price">200g <b>15,000원</b></p>
+      </article>
+      <article class="bean-card rv">
+        <a href="#subscribe" class="bean-img zoom" aria-label="윤슬 블렌드 주문 문의"><img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=80" alt="가득 쌓인 원두" loading="lazy"><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">주문 문의 · ORDER · 주문 문의 · ORDER ·</textPath></text></svg></span></a>
+        <p class="bean-origin">하우스 블렌드</p>
+        <h3>윤슬 블렌드</h3>
+        <ul class="chips"><li>꿀</li><li>구운 견과</li><li>오렌지</li></ul>
+        <div class="bean-meter" aria-label="산미 5단계 중 2"><span>산미</span><i style="--v:2"></i></div>
+        <p class="price">200g <b>15,000원</b></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 원두 취향 찾기: 패럴랙스 사진 배경 -->
+  <section class="section finder" id="finder">
+    <div class="finder-bg" aria-hidden="true"><img data-parallax="0.18" src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=2000&q=80" alt="" loading="lazy"></div>
+    <div class="wrap finder-in">
+      <div>
+        <p class="eyebrow rv">FIND YOUR CUP</p>
+        <h2 class="sec-title rv">두 번만 고르면,<br>오늘의 원두를<br>골라 드려요</h2>
+      </div>
+      <div class="finder-box glass rv">
+        <fieldset class="q">
+          <legend><span>01</span> 산미는 어떠세요?</legend>
+          <div class="opts">
+            <button type="button" data-q="acid" data-v="high" aria-pressed="false">새콤한 게 좋아요</button>
+            <button type="button" data-q="acid" data-v="low" aria-pressed="false">고소한 게 좋아요</button>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend><span>02</span> 주로 어떻게 마세요?</legend>
+          <div class="opts">
+            <button type="button" data-q="milk" data-v="black" aria-pressed="false">블랙으로</button>
+            <button type="button" data-q="milk" data-v="milk" aria-pressed="false">우유를 넣어서</button>
+          </div>
+        </fieldset>
+        <div class="result" id="finderResult" aria-live="polite">
+          <p class="result-hint">두 가지를 고르면 여기에 추천 원두가 나타나요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 메뉴: 분류 사진 카드 + 메뉴판 -->
+  <section class="section menu" id="menu">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow rv">MENU</p>
+        <h2 class="sec-title rv">오늘 마실 것</h2>
+      </div>
+      <div class="cat-grid">
+        <button class="cat zoom rv" data-tab="t-coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="라떼아트가 그려진 커피" loading="lazy"><span class="cat-name">커피</span><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">메뉴 보기 · MENU · 메뉴 보기 · MENU ·</textPath></text></svg></span></button>
+        <button class="cat zoom rv" data-tab="t-non"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80" alt="얼음이 든 음료" loading="lazy"><span class="cat-name">논커피</span><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">메뉴 보기 · MENU · 메뉴 보기 · MENU ·</textPath></text></svg></span></button>
+        <button class="cat zoom rv" data-tab="t-dessert"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="초콜릿 케이크" loading="lazy"><span class="cat-name">디저트</span><span class="ring" aria-hidden="true"><svg viewBox="0 0 100 100"><text><textPath href="#ringPath">메뉴 보기 · MENU · 메뉴 보기 · MENU ·</textPath></text></svg></span></button>
+      </div>
+      <div class="board">
+        <div class="tabs rv" role="tablist" aria-label="메뉴 분류">
+          <button role="tab" aria-selected="true" aria-controls="tab-coffee" id="t-coffee">커피</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-non" id="t-non" tabindex="-1">논커피</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-dessert" id="t-dessert" tabindex="-1">디저트</button>
+        </div>
+        <div class="menu-board glass rv">
+          <ul class="menu-list" role="tabpanel" id="tab-coffee" aria-labelledby="t-coffee">
+            <li><span>오늘의 핸드드립</span><i></i><b>6,500</b><small>이번 주 원두 중 하나를 골라 주세요</small></li>
+            <li><span>아메리카노</span><i></i><b>4,500</b><small>윤슬 블렌드</small></li>
+            <li><span>플랫화이트</span><i></i><b>5,500</b><small>진한 에스프레소와 얇은 우유 거품</small></li>
+            <li><span>윤슬 크림 라떼</span><i></i><b>6,000</b><small>시그니처 · 꿀 크림을 얹은 라떼</small></li>
+          </ul>
+          <ul class="menu-list" role="tabpanel" id="tab-non" aria-labelledby="t-non" hidden>
+            <li><span>제철 과일 에이드</span><i></i><b>6,000</b><small>계절마다 과일이 바뀌어요</small></li>
+            <li><span>얼그레이 밀크티</span><i></i><b>5,800</b><small>직접 우린 홍차</small></li>
+            <li><span>유자 캐모마일</span><i></i><b>5,500</b><small>따뜻하게만 준비돼요</small></li>
+          </ul>
+          <ul class="menu-list" role="tabpanel" id="tab-dessert" aria-labelledby="t-dessert" hidden>
+            <li><span>버터 바스크 치즈케이크</span><i></i><b>7,000</b><small>하루 한 판만 구워요</small></li>
+            <li><span>흑임자 휘낭시에</span><i></i><b>3,800</b><small>고소한 원두와 잘 어울려요</small></li>
+            <li><span>초콜릿 칩 쿠키</span><i></i><b>3,500</b><small>산미 있는 드립과 함께</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 로스팅 과정: 스티키 사진 교체 -->
+  <section class="section process" id="process">
+    <div class="wrap process-in" data-swap>
+      <div class="process-visual">
+        <div class="pv-frame">
+          <img class="swap-img on" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1000&q=80" alt="생두를 고르는 단계의 원두" loading="lazy">
+          <img class="swap-img" src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=1000&q=80" alt="갓 볶은 원두" loading="lazy">
+          <img class="swap-img" src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1000&q=80" alt="포장해 쉬게 하는 원두" loading="lazy">
+          <img class="swap-img" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=80" alt="핸드드립으로 내리는 커피" loading="lazy">
+          <p class="pv-num" aria-hidden="true"><span id="procNum">01</span>/04</p>
+        </div>
+      </div>
+      <div class="process-txt">
+        <p class="eyebrow rv">FROM BEAN TO CUP</p>
+        <h2 class="sec-title rv">생두가<br>한 잔이 되기까지</h2>
+        <ol class="process-steps">
+          <li class="step swap-item" data-i="0"><span>01</span><h3>고르기</h3><p>샘플을 직접 볶아 마셔 보고, 이번 계절에 가장 맛있는 생두만 들여요.</p></li>
+          <li class="step swap-item" data-i="1"><span>02</span><h3>볶기</h3><p>한 번에 적은 양만 볶아요. 원두마다 향이 가장 잘 사는 지점에서 멈춰요.</p></li>
+          <li class="step swap-item" data-i="2"><span>03</span><h3>쉬게 하기</h3><p>볶은 원두는 며칠 쉬어야 맛이 안정돼요. 마시기 좋은 날짜를 포장에 적어 드려요.</p></li>
+          <li class="step swap-item" data-i="3"><span>04</span><h3>내리기</h3><p>원두마다 물 온도와 분쇄도를 따로 맞춰 내려요. 집에서 내리는 법도 알려 드려요.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 띠 배너 CTA -->
+  <section class="band" aria-label="방문 안내">
+    <img data-parallax="0.15" src="https://images.unsplash.com/photo-1525610553991-2bede1a236e2?auto=format&fit=crop&w=2000&q=80" alt="" loading="lazy">
+    <div class="wrap band-in">
+      <h2 class="rv">가까운 날, 한 잔 하러 오세요.</h2>
+      <a href="#visit" class="btn btn-yellow rv">오시는 길 보기</a>
+    </div>
+  </section>
+
+  <!-- 공간 사진 격자 -->
+  <section class="section space" id="space">
+    <div class="wrap">
+      <div class="sec-head space-head">
+        <div>
+          <p class="eyebrow rv">OUR SPACE</p>
+          <h2 class="sec-title rv">윤슬의 하루</h2>
+        </div>
+        <a href="#space" class="btn btn-line rv" aria-label="인스타그램에서 더 보기 (실제 계정 링크로 교체)">인스타그램에서 더 보기</a>
+      </div>
+      <div class="grid8">
+        <figure class="mask zoom g-tall"><img src="https://images.unsplash.com/photo-1442975631115-c4f7b05b8a2c?auto=format&fit=crop&w=800&q=80" alt="손님이 있는 카페 바" loading="lazy"></figure>
+        <figure class="mask zoom"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" alt="라떼에 우유를 붓는 모습" loading="lazy"></figure>
+        <figure class="mask zoom"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="카페 간판 조명" loading="lazy"></figure>
+        <figure class="mask zoom g-wide"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=80" alt="화분이 놓인 카페 좌석" loading="lazy"></figure>
+        <figure class="mask zoom"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="커피잔으로 건배하는 손" loading="lazy"></figure>
+        <figure class="mask zoom"><img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&w=600&q=80" alt="햇빛 아래 놓인 커피 잔" loading="lazy"></figure>
+        <figure class="mask zoom"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80" alt="바구니에 담긴 쿠키" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 흐르는 사진 띠 -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <!-- 소식 -->
+  <section class="section notice" id="notice">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow rv">NEWS</p>
+        <h2 class="sec-title rv">소식</h2>
+      </div>
+      <div class="notice-list" id="noticeList"></div>
+    </div>
+  </section>
+
+  <!-- 운영 안내 + 오시는 길 (닷홈빌더 운영 안내 블록) -->
+  <section class="section visit" id="visit">
+    <div class="wrap visit-in">
+      <figure class="visit-photo mask"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80" alt="카페 외부 간판" loading="lazy">
+        <figcaption>서울 마포구 연남로 00, 1층</figcaption>
+      </figure>
+      <div class="visit-card glass rv">
+        <p class="eyebrow">VISIT</p>
+        <h2 class="sec-title">오시는 길</h2>
+        <dl class="hours">
+          <div><dt>화–금</dt><dd>09:00 – 20:00</dd></div>
+          <div><dt>토–일</dt><dd>10:00 – 21:00</dd></div>
+          <div><dt>월요일</dt><dd>정기 휴무 (로스팅 하는 날)</dd></div>
+        </dl>
+        <p class="tel">02-000-0000</p>
+        <p class="muted">홍대입구역 3번 출구에서 걸어서 7분 · 주차 공간 없음</p>
+        <div class="visit-btns">
+          <a href="#visit" class="btn btn-wine" aria-label="네이버 지도로 길찾기 (실제 링크로 교체)">네이버 지도</a>
+          <a href="#visit" class="btn btn-line" aria-label="카카오맵으로 길찾기 (실제 링크로 교체)">카카오맵</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마무리 CTA -->
+  <section class="final" id="subscribe">
+    <img data-parallax="0.12" src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=2000&q=80" alt="" loading="lazy">
+    <div class="wrap final-in">
+      <p class="eyebrow rv">SUBSCRIPTION</p>
+      <h2 class="final-title rv">집에서도<br>윤슬처럼.</h2>
+      <p class="rv">2주에 한 번, 갓 볶은 원두를 보내 드려요.<br>원하는 맛과 양을 카톡으로 알려 주세요.</p>
+      <a href="#subscribe" class="btn btn-yellow rv" aria-label="카카오톡 채널로 정기배송 문의 (실제 링크로 교체)">카톡으로 정기배송 문의</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <p class="f-logo">YUNSEUL ROASTERS</p>
+    <p>상호 윤슬 로스터스 · 대표 김윤슬 · 사업자등록번호 000-00-00000<br>서울 마포구 연남로 00, 1층 · 02-000-0000</p>
+    <p class="muted">© <span id="year"></span> 윤슬 로스터스. 이 페이지는 홈페이지 시안이며 상호, 가격, 주소, 연락처는 모두 예시예요. 사진: Unsplash</p>
+  </div>
+</footer>
+
+<!-- PC 플로팅 버튼 -->
+<div class="float" aria-label="빠른 연결">
+  <a href="tel:02-000-0000" aria-label="전화 걸기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
+  <a href="#subscribe" aria-label="카카오톡 문의"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></a>
+  <a href="#visit" aria-label="오시는 길"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></a>
+  <button type="button" id="toTop" aria-label="맨 위로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z"/></svg></button>
+</div>
+
+<!-- 모바일 하단 고정 바 -->
+<nav class="bottom-bar" aria-label="빠른 연결">
+  <a href="tel:02-000-0000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>전화</a>
+  <a href="#subscribe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>카톡</a>
+  <a href="#beans" class="main">원두 보기</a>
+</nav>
+
+<script src="js/main.js"></script>
+</body>
+</html>
